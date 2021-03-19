@@ -1,0 +1,5 @@
+vedioWebsite\controller\LoginController.class
+vedioWebsite\mapper\LoginMapper.class
+vedioWebsite\Pojo\User.class
+vedioWebsite\common\entity\BaseEntity.class
+vedioWebsite\Application.class
