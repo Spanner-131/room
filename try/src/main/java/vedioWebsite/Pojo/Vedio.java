@@ -19,4 +19,6 @@ public class Vedio extends BaseEntity {
     private int likeAmount;
     //评论数
     //private int cmtAmount;
+	
+	//
 }

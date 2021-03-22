@@ -14,4 +14,5 @@ public class Comment {
     //关联用
     private String vedioId;
     private String userCode;
+//
 }
