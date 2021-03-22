@@ -12,4 +12,6 @@ import vedioWebsite.common.entity.BaseEntity;
 public class User extends BaseEntity {
     private String userName;
     private String password;
+
+    private String subscribed;
 }

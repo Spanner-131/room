@@ -13,6 +13,7 @@ public class Vedio extends BaseEntity {
     private String url;
     private String title;
     private String userCode;
+    private String coverUrl;
     //用户加关注数的字段
 
     //点赞数

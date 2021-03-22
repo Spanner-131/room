@@ -1,0 +1,32 @@
+div,p,ul,ol{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+#center{
+	/* 根据banner去调 */
+}
+
+.box{
+	/* center中两个box */
+}
+
+#box-scorll{
+	height:0;
+	weight:0;
+}
+
+#vedio-display-bottom{
+	height:0;
+	weight:0;
+}
+
+#box-title{
+	height:0;
+	weight:0;
+}
+
+#vedio-display-right{
+	height:0;
+	weight:0;
+}
