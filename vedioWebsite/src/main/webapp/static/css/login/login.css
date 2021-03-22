@@ -1,0 +1,33 @@
+div,p,ul,ol{
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+}
+.loginBox{
+    margin:100px auto 0px auto;
+    width:300px;
+}
+.box1{
+    width:300px;
+    height: auto;
+}
+.box2{
+    width:300px;
+    height: auto;
+}
+label{
+    line-height: 18px;
+    font: normal normal 16px "幼圆";
+}
+
+#id{
+    margin-top:20px;
+    width:100px;
+    line-height: 18px;
+}
+
+#pwd{
+    margin-top:10px;
+    width:100px;
+    line-height: 18px;
+}
