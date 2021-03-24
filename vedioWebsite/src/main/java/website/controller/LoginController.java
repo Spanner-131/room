@@ -9,6 +9,13 @@ import website.common.entity.AjaxJson;
 import website.pojo.User;
 import website.service.LoginService;
 
+/**
+ *  @title:loginController
+ *  @author:hb
+ *  @content:登录，修改信息页接口
+ *  @createTime:2021/3/20
+ *  @modifiedTime:2021/3/22
+ * */
 @RestController
 @RequestMapping("/campus")
 public class LoginController {

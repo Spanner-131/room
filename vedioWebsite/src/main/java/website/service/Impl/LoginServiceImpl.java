@@ -10,6 +10,13 @@ import website.mapper.LoginMapper;
 import website.pojo.User;
 import website.service.LoginService;
 
+/**
+ *  @title：LoginServiceImpl
+ *  @author:hb
+ *  @content:服务接口实现
+ *  @createTime:2021/3/18
+ *  @modifiedTime:2021/3/21
+ * */
 @Service
 @Slf4j
 public class LoginServiceImpl implements LoginService {
