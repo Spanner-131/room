@@ -3,6 +3,7 @@ package website.mapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Select;
+import website.pojo.Subscription;
 import website.pojo.Vedio;
 import website.vo.VedioVo;
 
@@ -21,7 +22,7 @@ public interface VedioMapper extends BaseMapper<Vedio> {
     * */
     List<VedioVo> vedioInfo();
 
-    List<VedioVo> vedioSubscribed();
+    List<VedioVo> vedioSubscribed(List<Subscription> list);
 
 
 }

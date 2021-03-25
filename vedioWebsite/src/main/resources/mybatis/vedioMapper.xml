@@ -4,9 +4,20 @@
 <mapper namespace="website.mapper.VedioMapper">
 
     <select id="vedioInfo" resultType="website.vo.VedioVo">
-        Select USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
-        from vedio v,user u
-        where v.USER_CODE = u.USER_CODE
+        SELECT USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
+        FROM vedio v,user u
+        WHERE v.USER_CODE = u.USER_CODE
     </select>
 
+    <select id="vedioSubscribed" resultType="websit.vo.VedioVo">
+        SELECT USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
+        FROM vedio v
+        LEFT OUTER JOIN user u
+        ON v.USER_CODE = u.USER_CODE
+        WHERE u.USER_CODE IN
+        <foreach collection="list" item="userCode" index="index" open="(" separator="," close=")">
+            #{userCode}
+        </foreach>
+        ORDER BY CREATE_TIME
+    </select>
 </mapper>
