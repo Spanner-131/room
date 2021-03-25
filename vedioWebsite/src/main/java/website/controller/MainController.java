@@ -37,4 +37,12 @@ public class MainController {
         result.setData(vedioList);
         return result;
     }
+
+    @RequestMapping("/getVedioBySpt")
+    public AjaxJson getVedioBySpt(){
+        AjaxJson result = new AjaxJson();
+        List<VedioVo> vedioList = vedioService.getVedioInfo();
+        return result;
+    }
+
 }
