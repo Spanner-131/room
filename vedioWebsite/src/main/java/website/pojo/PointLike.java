@@ -17,6 +17,6 @@ import website.common.entity.BaseEntity;
 @NoArgsConstructor
 public class PointLike extends BaseEntity {
 
-    private String userCode1;
-    private String userCode2;
+    private String userCode;
+    private String vedioId;
 }
