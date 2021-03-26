@@ -1,16 +1,18 @@
 package website.service.Impl;
 
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import website.mapper.VedioMapper;
 import website.pojo.Subscription;
+import website.pojo.Vedio;
 import website.service.VedioService;
 import website.vo.VedioVo;
 
 import java.util.List;
 
 @Service
-public class VedioServiceImpl implements VedioService {
+public class VedioServiceImpl extends ServiceImpl<VedioMapper,Vedio> implements VedioService {
 
     @Autowired
     VedioMapper vedioMapper;
