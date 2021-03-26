@@ -11,7 +11,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *  @content:SpringBootApplication
  * */
 @SpringBootApplication
-@MapperScan("website.mapper")
+//@MapperScan("website.mapper")
 public class MainApplication {
     public static void main(String[] args) {
         SpringApplication.run(MainApplication.class,args);

@@ -10,7 +10,7 @@
     </select>
 
     <select id="vedioSubscribed" resultType="websit.vo.VedioVo">
-        SELECT USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
+        SELECT USER_CODE,USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
         FROM vedio v
         LEFT OUTER JOIN user u
         ON v.USER_CODE = u.USER_CODE

@@ -1,6 +1,7 @@
 package website.common.entity;
 
 
+import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,9 +15,17 @@ import java.util.Date;
  * */
 @Data
 public class BaseEntity {
+
+    @TableId(type = IdType.AUTO)
     private long id;
-    private int version;
+    @Version
+    private Integer version;
+    //自动填充配置
+    @TableField(fill = FieldFill.INSERT)
     private Date createTime;
+    //自动填充配置
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date modifiedTime;
-    private int deleted;
+    @TableLogic //逻辑删除
+    private Integer deleted;
 }

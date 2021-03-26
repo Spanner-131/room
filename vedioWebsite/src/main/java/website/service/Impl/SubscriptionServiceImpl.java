@@ -32,4 +32,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
         }
         return userCodelist;
     }
+
+    @Override
+    public void addSubscription(Subscription subscription) {
+        subscriptionMapper.insert(subscription);
+    }
 }
