@@ -41,9 +41,12 @@ function submit(){
                 if(data == 1){
                     alert("登入成功");
                     // 有空自己弄下shiro
-                    sessionStorage.setItem('user',userName);
-                    sessionStorage.setItem('userCode',userCode);
-                    window.location.href = 'edit';
+                    if(userName != ""){
+                        sessionStorage.setItem('user',userName);
+                    }else if(userCode !=null){
+                        sessionStorage.setItem('userCode',userCode);
+                    }
+                    window.location.href = 'homepage';
                 }else{
                     alert("账号或密码错误");
                     makeCheckCode();

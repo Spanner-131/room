@@ -1,0 +1,156 @@
+div,p,ul,ol{
+	marigin:0;
+	padding:0;
+	list-style: none;
+}
+
+/*视频大盒子*/
+#videoBox{
+	width:1080px;
+	height:606px;
+	border:1px solid black;
+	float:left;
+}
+/*信息框大盒子*/
+#infoBox{
+	width:400px;
+	height:606px;
+	float:left;
+	border:1px solid black;
+}
+/*视频大小*/
+video{
+	width:1080px;
+	height:606px;
+	float:left;
+}
+/*用户信息小盒子*/
+#userInfo{
+	overflow:hidden;
+	border:1px solid black;
+}
+/*头像*/
+#headImg{
+	border: 1px solid white;
+	border-radius: 60%;
+	width:92px;
+	height:80px;
+	float:left;
+}
+/*用户名*/
+#userName{
+	margin:10px 0px 0px 15px;
+	line-height: 18px;
+	font:normal bold 16px "微软雅黑";
+	float:left;
+}
+/*粉丝视频数量*/
+#brief{
+	position:relative;
+	top:35px;
+	left:-33px;
+}
+/*订阅按钮*/
+#subscribe{
+	width:80px;
+	height:30px;
+	position: relative;
+	top:5px;
+	left:160px;
+}
+
+/*视频信息小盒子*/
+#videoInfo{
+	border:1px solid black;
+	height:80px;
+}
+
+/*视频标题*/
+#title{
+	font:normal normal 20px "微软雅黑";
+	margin:5px 0px 0px 10px;
+}
+
+/*描述按钮*/
+#controlDes{
+	float:right;
+	margin-right:5px;
+}
+
+#description{
+	margin:5px 0px 0px 10px;
+	font:normal normal 12px "微软雅黑";
+}
+
+.browseInfo{
+	float:left;
+	margin:5px 0px 0px 10px;
+}
+
+/*功能区*/
+#funBox{
+	border:1px solid black;
+	height:55px;
+}
+
+/*小盒子*/
+.funcbox{
+	margin:5px 0px 0px 10px;
+	height:40px;
+	float:left;
+}
+
+/*点赞 收藏 评价 按钮*/
+.funcButton{
+	width:38px;
+	height:32px;
+}
+/*对应数字*/
+.num{
+	font:normal normal 12px "幼圆";
+	position:relative;
+	top:25px;
+	left:-31px;
+}
+
+#textBox{
+	height:100px;
+	border:1px solid black;
+}
+
+/*评价框*/
+#commentBox{
+
+}
+
+#comTitle{
+	border-bottom: 1px solid black;
+}
+
+.comment{
+	border-bottom:1px solid black;
+	height:70px;
+}
+
+#comHeadImg{
+	width:55px;
+	height:45px;
+	border-radius: 60%;
+	position:relative;
+	float:left;
+	margin:5px 0px 0px 10px;
+}
+
+#createTime{
+	position:relative;
+	left:7px;
+	top:4px;
+	font:normal normal 8px "微软雅黑"
+}
+
+#content{
+	position:relative;
+	left:7px;
+	top:4px;
+	font:normal normal 14px "微软雅黑"
+}

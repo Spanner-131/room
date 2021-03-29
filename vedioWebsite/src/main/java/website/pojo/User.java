@@ -32,6 +32,6 @@ public class User extends BaseEntity {
     //关注数
     //private String subscribed;
 
-    private boolean isAdmin;
+    private Integer isAdmin;
     //管理员要管理视频
 }

@@ -1,6 +1,5 @@
 package website.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -8,10 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import website.common.entity.AjaxJson;
 import website.pojo.Subscription;
-import website.pojo.Vedio;
 import website.service.SubscriptionService;
-import website.service.VedioService;
-import website.vo.VedioVo;
+import website.service.VideoService;
+import website.vo.VideoVo;
 
 import java.util.List;
 
@@ -23,16 +21,16 @@ import java.util.List;
  *  @modifiedTime:2021/3/24
  * */
 @RestController
-@RequestMapping("/main")
+@RequestMapping("/campus")
 public class MainController {
 
     @Autowired
-    VedioService vedioService;
+    VideoService videoService;
 
     @Autowired
     SubscriptionService subscriptionService;
 
-    @RequestMapping("/homePage")
+    @RequestMapping("/homepage")
     public ModelAndView homePage(){
         return new ModelAndView("/main/main");
     }
@@ -40,7 +38,7 @@ public class MainController {
     @RequestMapping("/getVedio")
     public AjaxJson getVedio(){
         AjaxJson result = new AjaxJson();
-        List<VedioVo> vedioList = vedioService.getVedioInfo();
+        List<VideoVo> vedioList = videoService.getVideoInfo();
         result.setSuccess(true);
         result.setData(vedioList);
         return result;
@@ -50,7 +48,7 @@ public class MainController {
     public AjaxJson getVedioBySpt(@Param("userCode")String userCode){
         AjaxJson result = new AjaxJson();
         List<Subscription> subscriptionList = subscriptionService.getUserCodeList(userCode);
-        List<VedioVo> vedioList = vedioService.getVedioSubscribed(subscriptionList);
+        List<VideoVo> vedioList = videoService.getVideoSubscribed(subscriptionList);
         result.setSuccess(true);
         result.setData(vedioList);
         return result;

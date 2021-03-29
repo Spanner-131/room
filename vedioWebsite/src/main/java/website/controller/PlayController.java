@@ -1,22 +1,19 @@
 package website.controller;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import website.common.entity.AjaxJson;
-import website.mapper.CommentMapper;
 import website.pojo.*;
-import website.service.CollectionService;
-import website.service.CommentService;
-import website.service.PointLikeService;
-import website.service.SubscriptionService;
+import website.service.*;
+import website.vo.VideoVo;
 
 @RestController
-@RequestMapping("/play")
+@RequestMapping("/campus")
 public class PlayController {
 
     @Autowired
@@ -31,12 +28,29 @@ public class PlayController {
     @Autowired
     CommentService commentService;
 
-    @RequestMapping("/index")
-    public ModelAndView index(){
-        return new ModelAndView("play/play");
+    @Autowired
+    VideoService videoService;
+
+    @RequestMapping("/play/{videoId}")
+    public ModelAndView index(@PathVariable("videoId")String videoId){
+        ModelAndView mv = new ModelAndView("play/play");
+        mv.addObject("videoId",videoId);
+        return mv;
     }
 
     //界面信息通过homepage页面modelandview跳转并返回
+    @RequestMapping("/getVideo")
+    public AjaxJson getVideo(@Param("id")String id){
+        AjaxJson result = new AjaxJson();
+        try {
+            VideoVo vv = videoService.getPlayInfo(id);
+            result.setSuccess(true);
+            result.setData(vv);
+        }catch(Exception e){
+            result.setSuccess(false);
+        }
+        return result;
+    }
 
     /**
     * operation:关注or取消关注
@@ -126,7 +140,7 @@ public class PlayController {
      * param: vedioId
      * */
     @RequestMapping("/showComment")
-    public AjaxJson showComment(Vedio vedio){
+    public AjaxJson showComment(Video video){
         AjaxJson result = new AjaxJson();
         //三表联表查头像，时间，内容，降序排序
         return result;
