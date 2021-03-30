@@ -3,6 +3,8 @@ package website.vo;
 import lombok.Data;
 import website.pojo.Video;
 
+import java.util.List;
+
 /**
  *  @title:VedioVo
  *  @author:hb
@@ -16,6 +18,7 @@ public class VideoVo extends Video {
     private String userName;
     private String userCode;
     private String headImg;
+    private List comList;
     //点赞数
     private int likeAmount;
     //评论数

@@ -31,6 +31,10 @@ public class PlayController {
     @Autowired
     VideoService videoService;
 
+    /**
+     * operation:跳转播放页面
+     * param: 通过pathVariable传递videoId返回前台
+     * */
     @RequestMapping("/play/{videoId}")
     public ModelAndView index(@PathVariable("videoId")String videoId){
         ModelAndView mv = new ModelAndView("play/play");
@@ -38,6 +42,10 @@ public class PlayController {
         return mv;
     }
 
+    /**
+     * operation:获取视频信息
+     * param: 返回信息中暂不包括评论信息
+     * */
     //界面信息通过homepage页面modelandview跳转并返回
     @RequestMapping("/getVideo")
     public AjaxJson getVideo(@Param("id")String id){

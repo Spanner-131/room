@@ -36,16 +36,19 @@ function videoGo(videoId){
 			                     <div class="funcbox"><button class="funcButton">评</button><span class="num">' + AjaxJson.data.cmtAmount + '</span></div> '
 			$('#funBox').html(funBoxContent);
 
-			var commentBoxContent = '<div class="row"> \
-			<div class="headImg"> <img src="' + data.headImg + '" /></div> \
-			<div class="userName2">'+ data.userName + '</div> \
-			<div class="time">'+ data.createTime + '</div> \
-			<div class="comment">'+ data.comment + '</div> \
+			var commentBoxContent = '<div id="comTitle">评论框</div>'
+			var comListLength = AjaxJson.data.comList.length;
+			var comContent = '<div class="comment"> \
+			<img id="comHeadImg" src="' + AjaxJson.data.comList.headImg + '" /> \
+			<div class="comUserName">'+ AjaxJson.data.comList.userName + '</div> \
+			<div class="createTime">'+ AjaxJson.data.comList.createTime + '</div> \
+			<div class="content">'+ AjaxJson.data.comList.content + '</div> \
 			</div>';
-			$('#comment').html(comment);
-			
-			var vedioPlayer = '<vedio src=' + data.url +'/>';
-			$('#vedioPlayer').html(vedioPlayer);
+			for (i = 0;i < comListLength;i++){
+				commentBoxContent += comContent;
+			}
+			$('#comment').html(commentBoxContent);
+
 		}
 	})
 }

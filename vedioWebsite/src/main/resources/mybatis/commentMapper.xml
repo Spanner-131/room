@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="website.mapper.CommentMapper">
+    <select id="comList" parameterType="website.pojo.Comment" resultType="website.vo.CommentVo">
+        SELECT USER_NAME,HEAR_IMG,CONTENT,c.CREATE_TIME
+        FORM comment c,user u
+        WHERE c.USER_CODE = u.USER_CODE
+        AND c.VIDEO_ID = #{videoId}
+        ORDER BY c.CREATE_TIME DESC
+    </select>
+
+</mapper>

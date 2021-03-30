@@ -9,6 +9,7 @@ import website.mapper.*;
 import website.pojo.Subscription;
 import website.pojo.Video;
 import website.service.VideoService;
+import website.vo.CommentVo;
 import website.vo.VideoVo;
 
 import java.util.ArrayList;
@@ -49,7 +50,10 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         return vedioList;
     }
 
-    //播放页面的初始化界面信息
+    /**
+     * operation:播放页面的初始化界面信息
+     * param: id(video),videoId
+     * */
     @Override
     public VideoVo getPlayInfo(String id) {
         QueryWrapper findUserCode = new QueryWrapper();
@@ -61,6 +65,8 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         //点赞 收藏 评论数
         QueryWrapper statics =  new QueryWrapper();
         statics.eq("VIDEO_ID",id);
+        //comment列表返回评价信息,应该还需修改返回列表
+        List<CommentVo> comList = commentMapper.comList(id);
         Integer comtAmount = commentMapper.selectCount(statics);
         Integer likeAmount = pointLikeMapper.selectCount(statics);
         Integer coltAmount = collectionMapper.selectCount(statics);
@@ -76,6 +82,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
 
         //把统计数据存入pojo
         vv.setLikeAmount(likeAmount);
+        vv.setComList(comList);
         vv.setCmtAmount(comtAmount);
         vv.setColtAmount(coltAmount);
         vv.setBowsAmount(bowsAmount);

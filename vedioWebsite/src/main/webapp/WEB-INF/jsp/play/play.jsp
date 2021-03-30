@@ -31,7 +31,7 @@
 				<!-- textBox 用ui -->
 			</div>
 			<div id="commentBox">
-				
+
 			</div>
 		</div>
 		
