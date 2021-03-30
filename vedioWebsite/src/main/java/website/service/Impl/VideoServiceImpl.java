@@ -81,6 +81,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         Integer vdoAmount = videoMapper.selectCount(uCodeWrapper);
 
         //把统计数据存入pojo
+        vv.setUserCode(userCode);
         vv.setLikeAmount(likeAmount);
         vv.setComList(comList);
         vv.setCmtAmount(comtAmount);

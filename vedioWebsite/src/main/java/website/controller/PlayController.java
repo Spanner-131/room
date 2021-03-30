@@ -12,6 +12,9 @@ import website.pojo.*;
 import website.service.*;
 import website.vo.VideoVo;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/campus")
 public class PlayController {
@@ -44,7 +47,7 @@ public class PlayController {
 
     /**
      * operation:获取视频信息
-     * param: 返回信息中暂不包括评论信息
+     * param: 返回信息中评价信息须检验
      * */
     //界面信息通过homepage页面modelandview跳转并返回
     @RequestMapping("/getVideo")
@@ -63,6 +66,7 @@ public class PlayController {
     /**
     * operation:关注or取消关注
     * param: 前台session.getItem获取用户userCode1,userCode2
+    * ps: 此处表内新增的数据deleted应该是1
     * */
     @RequestMapping("/subOrNot")
     public AjaxJson subscribeUser(Subscription subscription){
@@ -96,32 +100,58 @@ public class PlayController {
 
     /**
      * operation:点赞or取消点赞
-     * param: 前台session.getItem获取用户userCode,vedioId
+     * param: 前台session.getItem获取用户userCode,videoId
      * */
     @RequestMapping("/pointLikeOrNot")
     public AjaxJson pointlike(PointLike pointLike){
         AjaxJson result = new AjaxJson();
-        try{
-            pointLikeService.addPointLike(pointLike);
-            result.setSuccess(true);
-        }catch(Exception e){
-            result.setSuccess(false);
+        int checkExisted = pointLikeService.likeOrNot(pointLike);
+        if(checkExisted == 0){
+            try{
+                pointLikeService.save(pointLike);
+                result.setSuccess(true);
+            }catch(Exception e){
+                result.setSuccess(false);
+            }
+        }else{
+            try{
+                Map removeMap = new HashMap();
+                removeMap.put("USER_CODE",pointLike.getUserCode());
+                removeMap.put("VIDEO_ID",pointLike.getVideoId());
+                pointLikeService.removeByMap(removeMap);
+                result.setSuccess(true);
+            }catch(Exception e){
+                result.setSuccess(false);
+            }
         }
         return result;
     }
 
     /**
      * operation:收藏or取消收藏
-     * param: 前台session.getItem获取用户userCode,vedioId
+     * param: 前台session.getItem获取用户userCode,videoId
      * */
     @RequestMapping("/collectOrNot")
     public AjaxJson addCollection(Collection collection){
         AjaxJson result = new AjaxJson();
-        try{
-            collectionService.addCollection(collection);
-            result.setSuccess(true);
-        }catch(Exception e){
-            result.setSuccess(false);
+        int checkColt = collectionService.collectOrNot(collection);
+        if(checkColt == 0){
+            try{
+                collectionService.save(collection);
+                result.setSuccess(true);
+            }catch(Exception e){
+                result.setSuccess(false);
+            }
+        }else{
+            try{
+                Map removeMap = new HashMap();
+                removeMap.put("USER_CODE",collection.getUserCode());
+                removeMap.put("VIDEO_ID",collection.getVideoId());
+                commentService.removeByMap(removeMap);
+                result.setSuccess(true);
+            }catch(Exception e){
+                result.setSuccess(false);
+            }
         }
         return result;
     }
@@ -129,7 +159,7 @@ public class PlayController {
 
     /**
      * operation:评价
-     * param: 前台session.getItem获取用户headImg,userName,content,vedioId
+     * param: 前台session.getItem获取用户headImg,userName,content,videoId
      * */
     @RequestMapping("/comment")
     public AjaxJson addComment(Comment comment){

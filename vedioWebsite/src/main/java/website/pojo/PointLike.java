@@ -18,5 +18,5 @@ import website.common.entity.BaseEntity;
 public class PointLike extends BaseEntity {
 
     private String userCode;
-    private String vedioId;
+    private String videoId;
 }

@@ -18,6 +18,6 @@ import website.common.entity.BaseEntity;
 public class Browsing extends BaseEntity {
 
     private String userCode;
-    private String vedioId;
+    private String videoId;
     private String costTime;
 }

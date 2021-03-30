@@ -35,22 +35,22 @@ public class MainController {
         return new ModelAndView("/main/main");
     }
 
-    @RequestMapping("/getVedio")
-    public AjaxJson getVedio(){
+    @RequestMapping("/getVideo")
+    public AjaxJson getVideo(){
         AjaxJson result = new AjaxJson();
-        List<VideoVo> vedioList = videoService.getVideoInfo();
+        List<VideoVo> videoList = videoService.getVideoInfo();
         result.setSuccess(true);
-        result.setData(vedioList);
+        result.setData(videoList);
         return result;
     }
 
-    @RequestMapping("/getVedioBySpt")
-    public AjaxJson getVedioBySpt(@Param("userCode")String userCode){
+    @RequestMapping("/getVideoBySpt")
+    public AjaxJson getVideoBySpt(@Param("userCode")String userCode){
         AjaxJson result = new AjaxJson();
         List<Subscription> subscriptionList = subscriptionService.getUserCodeList(userCode);
-        List<VideoVo> vedioList = videoService.getVideoSubscribed(subscriptionList);
+        List<VideoVo> videoList = videoService.getVideoSubscribed(subscriptionList);
         result.setSuccess(true);
-        result.setData(vedioList);
+        result.setData(videoList);
         return result;
     }
 

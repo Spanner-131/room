@@ -20,7 +20,7 @@ public class Comment extends BaseEntity {
     //内容
     private String content;
     //关联用
-    private String vedioId;
+    private String videoId;
     private String userCode;
 //
 }

@@ -42,9 +42,9 @@ function submit(){
                     alert("登入成功");
                     // 有空自己弄下shiro
                     if(userName != ""){
-                        sessionStorage.setItem('user',userName);
+                        sessionStorage.setItem('currentUserName',userName);
                     }else if(userCode !=null){
-                        sessionStorage.setItem('userCode',userCode);
+                        sessionStorage.setItem('currentUserCode',userCode);
                     }
                     window.location.href = 'homepage';
                 }else{

@@ -5,5 +5,7 @@ import website.pojo.PointLike;
 
 public interface PointLikeService extends IService<PointLike> {
 
-    void addPointLike(PointLike pointLike);
+//    void addPointLike(PointLike pointLike);
+
+    int likeOrNot(PointLike pointLike);
 }

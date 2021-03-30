@@ -14,4 +14,5 @@ public interface SubscriptionService extends IService<Subscription> {
 
     // 有误关注，返回1/0
     int subOrNot(Subscription subscription);
+
 }

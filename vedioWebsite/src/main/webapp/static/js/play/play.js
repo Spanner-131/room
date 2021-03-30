@@ -1,14 +1,35 @@
-//ModelAndVied.setAttribute("",id);
 $(function(){
+	//初始化视频信息
 	var videoId = $('#videoId').html();
 	console.log(videoId);
 	videoGo(videoId);
 });
 
+//获取学号
+function getCurrentUserCode(){
+	var currentUserCode = sessionStorage.getItem('currentUserCode');
+	if(currentUserCode == "") {
+		var currentUserName = sessionStorage.getItem('currentUserName');
+		$.ajax({
+			url: '/sspu/campus/init',
+			type: 'get',
+			dataType: 'json',
+			data: {
+				'userName': currentUserName,
+				'userCode': ''
+			},
+			success: function (AjaxJson) {
+				currentUserCode = AjaxJson.data.userCode;
+			}
+		})
+	}
+	return currentUserCode;
+}
+
 function videoGo(videoId){
 	$.ajax({
 		url:'/sspu/campus/getVideo',
-		type:"post",
+		type:'post',
 		dataType:'json',
 		data:{
 			'id':videoId
@@ -20,6 +41,7 @@ function videoGo(videoId){
 
 			var userInfo = '<img id="headImg" src="' + AjaxJson.data.headImg + '" /></div> \
 			<div id="userName">'+ AjaxJson.data.userName + '</div> \
+			<div id="userCode"> + AjaxJson.data.userCode + </div> \
 			<div id="brief">' + AjaxJson.data.subAmount + '&emsp;' + AjaxJson.vdoAmount + '</div> \
 			<button id="subscribe">+ 关注</button>'
 			$('#userInfo').html(userInfo);
@@ -51,4 +73,59 @@ function videoGo(videoId){
 
 		}
 	})
+}
+
+function subscribe(){
+	var userCode = $('#userCode').val();
+	var currentUserCode = getCurrentUserCode();
+	$.ajax({
+		url:'/sspu/campus/subOrNot',
+		type:'post',
+		dataType:'json',
+		data:{
+			'userCode1':currentUserCode,
+			'userCode2':userCode
+		},
+		success:function (AjaxJson) {
+			alert(AjaxJson.message);
+		}
+	})
+}
+
+function like(){
+	var currentUserCode = getCurrentUserCode();
+	var videoId = $('#videoId').html();
+	$.ajax({
+		url:'/sspu/campus/pointLikeOrNot',
+		type:'post',
+		dataType:'json',
+		data:{
+			'userCode':currentUserCode,
+			'videoId':videoId
+		},
+		success:function (AjaxJson) {
+			alert(AjaxJson.message);
+		}
+	})
+}
+
+function collect(){
+	var currentUserCode = getCurrentUserCode();
+	var videoId = $('#videoId').html();
+	$.ajax({
+		url:'collectOrNot',
+		type:'post',
+		dataType:'json',
+		data:{
+			'userCode':currentUserCode,
+			'videoId':videoId
+		},
+		success:function (AjaxJson) {
+			alert(AjaxJson.message);
+		}
+	})
+}
+
+function comment(){
+
 }

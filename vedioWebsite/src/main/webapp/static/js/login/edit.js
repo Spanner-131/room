@@ -1,18 +1,20 @@
 $(function () {
-    var id = sessionStorage.getItem('user');
-    if(id.match(/^\d{11}$/)){
-        var userCode = id;
-    }else{
-        var userName = id;
-    }
+    // var id = sessionStorage.getItem('user');
+    // if(id.match(/^\d{11}$/)){
+    //     var userCode = id;
+    // }else{
+    //     var userName = id;
+    // }
+    var currentUserName = sessionStorage.getItem('currentUserName');
+    var currentUserCode = sessionStorage.getItem('currentUserCode')
     $.ajax({
         url:'init',
         type:'get',
         dataType:'json',
         async:false,
         data:{
-            'userCode':userCode,
-            'userName':userName
+            'userCode':currentUserCode,
+            'userName':currentUserName
         },
         success:function (user) {
             $('#userName').val(user.data.userName);
