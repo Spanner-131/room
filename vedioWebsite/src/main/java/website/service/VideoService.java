@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface VideoService extends IService<Video> {
 
-    List<VideoVo> getVideoInfo();
+    List<VideoVo> getRecdVideoInfo();
 
     List<VideoVo> getVideoSubscribed(List<Subscription> list);
 

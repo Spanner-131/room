@@ -38,8 +38,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     BrowsingMapper browsingMapper;
 
     @Override
-    public List<VideoVo> getVideoInfo() {
-//        List<VideoVo> videoList = videoMapper.videoInfo();
+    public List<VideoVo> getRecdVideoInfo() {
         List<VideoVo> videoList = new ArrayList<>();
         return videoList;
     }
@@ -47,6 +46,7 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
     @Override
     public List<VideoVo> getVideoSubscribed(List<Subscription> list) {
         List<VideoVo> vedioList = videoMapper.videoSubscribed(list);
+        //分页查询即可
         return vedioList;
     }
 

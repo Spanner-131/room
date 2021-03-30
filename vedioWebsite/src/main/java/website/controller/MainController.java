@@ -38,9 +38,13 @@ public class MainController {
     @RequestMapping("/getVideo")
     public AjaxJson getVideo(){
         AjaxJson result = new AjaxJson();
-        List<VideoVo> videoList = videoService.getVideoInfo();
+        try{
+        List<VideoVo> videoList = videoService.getRecdVideoInfo();
         result.setSuccess(true);
         result.setData(videoList);
+        }catch (Exception e){
+            result.setSuccess(false);
+        }
         return result;
     }
 
