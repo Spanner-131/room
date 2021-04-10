@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="website.mapper.SubscriptionMapper">
+    <select id="querySubscription" parameterType="website.pojo.Subscription" resultType="int">
+        SELECT DELETED
+        FROM subscription
+        WHERE USER_CODE1 = #{userCode1}
+        AND USER_CODE2 = #{userCode2}
+    </select>
+
+    <update id="reSubscribe" parameterType="website.pojo.Subscription">
+        UPDATE subscription
+        SET DELETED = 0
+        WHERE USER_CODE1 = #{userCode1}
+        AND USER_CODE2 = #{userCode2}
+    </update>
+    
+</mapper>

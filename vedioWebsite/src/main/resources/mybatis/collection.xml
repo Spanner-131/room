@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="website.mapper.CollectionMapper">
+    <select id="queryColt" parameterType="website.pojo.Collection" resultType="int">
+        SELECT DELETED
+        FROM collection
+        WHERE USER_CODE = #{userCode}
+          AND VIDEO_ID = #{videoId}
+    </select>
+
+    <update id="reColt" parameterType="website.pojo.Collection">
+        UPDATE collection
+        SET DELETED = 0
+        WHERE USER_CODE = #{userCode}
+          AND VIDEO_ID = #{videoId}
+    </update>
+</mapper>
