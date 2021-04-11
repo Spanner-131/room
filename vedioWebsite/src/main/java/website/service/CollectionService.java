@@ -9,4 +9,6 @@ public interface CollectionService extends IService<Collection> {
 //    void addCollection(Collection collection);
 
     int collectOrNot(Collection collection);
+
+    void reColt(Collection collection);
 }

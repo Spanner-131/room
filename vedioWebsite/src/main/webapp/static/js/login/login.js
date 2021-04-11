@@ -47,7 +47,9 @@ function submit(){
                         sessionStorage.setItem('currentUserCode',userCode);
                     }
                     window.location.href = 'homepage';
-                }else{
+                }else if(data == 2){
+                    window.location.href = 'manager';
+                }else if(data == 0){
                     alert("账号或密码错误");
                     makeCheckCode();
                     $('#checkCode').val("");

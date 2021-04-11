@@ -39,23 +39,23 @@ function videoGo(videoId){
 		    <source src="' + AjaxJson.data.url + '" type="video/mp4"/></video>'
             $('#videoPlayer').html(videoSrc);
 
-			var userInfo = '<img id="headImg" src="' + AjaxJson.data.headImg + '" /></div> \
+			var userInfo = '<img id="headImg" src="' + AjaxJson.data.headImg + '" /> \
 			<div id="userName">'+ AjaxJson.data.userName + '</div> \
-			<div id="userCode"> + AjaxJson.data.userCode + </div> \
-			<div id="brief">' + AjaxJson.data.subAmount + '&emsp;' + AjaxJson.vdoAmount + '</div> \
-			<button id="subscribe">+ 关注</button>'
+			<div id="userCode">' + AjaxJson.data.userCode + '</div> \
+			<div id="brief">' + AjaxJson.data.subAmount + '关注&emsp;' + AjaxJson.data.vdoAmount + '视频</div> \
+			<button id="subscribe" onclick="subscribe()">+ 关注</button>'
 			$('#userInfo').html(userInfo);
 			
-			var videoInfo = '<div id="title">' + AjaxJson.data.title + '<button id="controlsDes">^</button></div> \
-			<div id="description">'+ AjaxJson.data.description + '</div> \
-			<div class="browseInfo"> + AjaxJson.data.bowsAmount + </div> \
-			<div class="browseInfo"> + AjaxJson.data.createTime + </div> \
-			<div class="browseInfo"> + videoId + </div>'
+			var videoInfo = '<div id="title">标题:' + AjaxJson.data.title + '<button id="controlsDes">^</button></div> \
+			<div id="description">描述:'+ AjaxJson.data.description + '</div> \
+			<div class="browseInfo">' + AjaxJson.data.bowsAmount + '</div> \
+			<div class="browseInfo">' + AjaxJson.data.createTimeStr + '</div> \
+			<div class="browseInfo">视频号:' + videoId + '</div>'
 			$('#videoInfo').html(videoInfo);
 
-			var funBoxContent = '<div class="funcbox"><button class="funcButton">点</button><span class="num">' + AjaxJson.data.likeAmount + '</span></div> \
-			                     <div class="funcbox"><button class="funcButton">收</button><span class="num">' + AjaxJson.data.coltAmount + '</span></div> \
-			                     <div class="funcbox"><button class="funcButton">评</button><span class="num">' + AjaxJson.data.cmtAmount + '</span></div> '
+			var funBoxContent = '<div class="funcbox"><button class="funcButton" onclick="like()">点</button><span class="num">' + AjaxJson.data.likeAmount + '</span></div> \
+			                     <div class="funcbox"><button class="funcButton" onclick="collect()">收</button><span class="num">' + AjaxJson.data.coltAmount + '</span></div> \
+			                     <div class="funcbox"><button class="funcButton" onclick="showTextBox()">评</button><span class="num">' + AjaxJson.data.cmtAmount + '</span></div> '
 			$('#funBox').html(funBoxContent);
 
 			var commentBoxContent = '<div id="comTitle">评论框</div>'
@@ -76,8 +76,9 @@ function videoGo(videoId){
 }
 
 function subscribe(){
-	var userCode = $('#userCode').val();
+	var userCode = $('#userCode').html();
 	var currentUserCode = getCurrentUserCode();
+	console.log(currentUserCode);
 	$.ajax({
 		url:'/sspu/campus/subOrNot',
 		type:'post',
@@ -113,7 +114,7 @@ function collect(){
 	var currentUserCode = getCurrentUserCode();
 	var videoId = $('#videoId').html();
 	$.ajax({
-		url:'collectOrNot',
+		url:'/sspu/campus/collectOrNot',
 		type:'post',
 		dataType:'json',
 		data:{
@@ -126,6 +127,6 @@ function collect(){
 	})
 }
 
-function comment(){
-
+function showTextBox(){
+	$('#textBox').show();
 }

@@ -20,16 +20,16 @@ function videosDisplay(){
 		success:function(data){
 			//遍历data
 			//右侧关注
-			var vedioRightHtml = '<a href="' + data.url +'"><div class="row"> \
+			var videoRightHtml = '<a href="' + data.url +'"><div class="row"> \
 			<div class ="squareRight"> <img src="' + data.coverUrl + '" /></div> \
 			<div class="titleRight">'+ data.title + '</div> \
 			<div class="userNameRight">' + data.userName + '</div> \
 			<div class="timeRight">'+ data.createTime +'</div> \
 			</div></a>';
-			$('#vedio-display-right').html(vedioRightHtml);
+			$('#vedio-display-right').html(videoRightHtml);
 			
 			//下侧视频
-			var vedioBottomHtml = '<a href="' + data.url +'"><div class="row"> \
+			var videoBottomHtml = '<a href="' + data.url +'"><div class="row"> \
 			<div class="squareBottom"><img class="cover" src="'+ data.coverUrl + '"/></div> \
 			<div class="titleBottom">' + data.title + '</div> \
 			<div class="userNameBottom">' + data.userName + '</div> \

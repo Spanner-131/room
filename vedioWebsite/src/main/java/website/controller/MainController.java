@@ -35,8 +35,8 @@ public class MainController {
         return new ModelAndView("/main/main");
     }
 
-    @RequestMapping("/getVideo")
-    public AjaxJson getVideo(){
+    @RequestMapping("/getRecdVideo")
+    public AjaxJson getRecdVideo(){
         AjaxJson result = new AjaxJson();
         try{
         List<VideoVo> videoList = videoService.getRecdVideoInfo();

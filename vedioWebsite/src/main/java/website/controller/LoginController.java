@@ -46,9 +46,19 @@ public class LoginController {
         return new ModelAndView("/login/register");
     }
 
+    //2021.4.4 modify
     @RequestMapping("/addUser")
-    public int addUser(User user){
-        return loginService.saveUser(user);
+    public AjaxJson addUser(User user){
+        AjaxJson result = new AjaxJson();
+        try{
+            loginService.save(user);
+            result.setSuccess(true);
+            result.setMessage("注册成功");
+        }catch(Exception e){
+            result.setSuccess(false);
+            result.setMessage("注册失败，请重新尝试");
+        }
+        return result;
     }
 
     @RequestMapping("/edit")

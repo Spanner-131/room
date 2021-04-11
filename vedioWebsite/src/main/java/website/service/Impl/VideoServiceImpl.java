@@ -12,7 +12,9 @@ import website.service.VideoService;
 import website.vo.CommentVo;
 import website.vo.VideoVo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Transactional
@@ -62,13 +64,17 @@ public class VideoServiceImpl extends ServiceImpl<VideoMapper, Video> implements
         String userCode = video.getUserCode();
         //baseInfo
         VideoVo vv = videoMapper.videoInfo(userCode);
+        Date createTime = vv.getCreateTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD HH:mm:ss");
+        String format = sdf.format(createTime);
+        vv.setCreateTimeStr(format);
         //点赞 收藏 评论数
         QueryWrapper statics =  new QueryWrapper();
         statics.eq("VIDEO_ID",id);
         //comment列表返回评价信息,应该还需修改返回列表
         List<CommentVo> comList = commentMapper.comList(id);
-        Integer comtAmount = commentMapper.selectCount(statics);
         Integer likeAmount = pointLikeMapper.selectCount(statics);
+        Integer comtAmount = commentMapper.selectCount(statics);
         Integer coltAmount = collectionMapper.selectCount(statics);
         Integer bowsAmount = browsingMapper.selectCount(statics);
         //订阅数

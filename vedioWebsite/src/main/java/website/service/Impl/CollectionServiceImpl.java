@@ -1,11 +1,10 @@
 package website.service.Impl;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import website.common.entity.AidData;
 import website.mapper.CollectionMapper;
 import website.pojo.Collection;
 import website.service.CollectionService;
@@ -24,14 +23,21 @@ public class CollectionServiceImpl extends ServiceImpl<CollectionMapper,Collecti
 
     @Override
     public int collectOrNot(Collection collection) {
-        QueryWrapper collectWrapper = new QueryWrapper();
-        collectWrapper.eq("USER_CODE",collection.getUserCode());
-        collectWrapper.eq("VIDEO_ID",collection.getVideoId());
-        Collection checkColt = collectionMapper.selectOne(collectWrapper);
-        if(StringUtils.isEmpty(checkColt.getUserCode()) || StringUtils.isEmpty(checkColt.getVideoId())){
-            return 0;
-        }else{
-            return 1;
+        int result;
+        try{
+            if(collectionMapper.queryColt(collection) == 0){
+                result = AidData.resultExist;
+            }else{
+                result = AidData.resultLgcDel;
+            }
+        }catch (Exception e){
+            result = AidData.resultNull;
         }
+        return result;
+    }
+
+    @Override
+    public void reColt(Collection collection) {
+        collectionMapper.reColt(collection);
     }
 }

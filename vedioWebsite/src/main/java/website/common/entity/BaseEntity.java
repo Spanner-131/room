@@ -16,6 +16,7 @@ import java.util.Date;
 @Data
 public class BaseEntity {
 
+    //2021.04.05 表字段不能为varchar，要设置为bigint 并自增
     @TableId(type = IdType.AUTO)
     private long id;
     @Version

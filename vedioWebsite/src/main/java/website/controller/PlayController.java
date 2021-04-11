@@ -71,10 +71,16 @@ public class PlayController {
     @RequestMapping("/subOrNot")
     public AjaxJson subscribeUser(Subscription subscription){
         AjaxJson result = new AjaxJson();
+        //test使用
+        //subscription.setUserCode1("20191111120");
         int queryResult = subscriptionService.subOrNot(subscription);
-        if(queryResult == 0){
+        if(queryResult == 1 || queryResult == -1){
             try{
-                subscriptionService.save(subscription);
+                if(queryResult == 1) {
+                    subscriptionService.reSubscribe(subscription);
+                }else{
+                    subscriptionService.save(subscription);
+                }
                 result.setSuccess(true);
                 result.setMessage("关注成功！");
             }catch(Exception e){
@@ -86,7 +92,8 @@ public class PlayController {
                 QueryWrapper queryWrapper = new QueryWrapper();
                 queryWrapper.eq("USER_CODE1",subscription.getUserCode1());
                 queryWrapper.eq("USER_CODE2",subscription.getUserCode2());
-                //用继承的remove方法，需重新声明wrapper，不知道是假删除还是真删，测试过后决定是否修改
+                //Q:用继承的remove方法，需重新声明wrapper，不知道是假删除还是真删，测试过后决定是否修改
+                //A:2021.04.04 结果为逻辑删除，已修改逻辑
                 subscriptionService.remove(queryWrapper);
                 result.setSuccess(true);
                 result.setMessage("取消关注");
@@ -103,29 +110,37 @@ public class PlayController {
      * param: 前台session.getItem获取用户userCode,videoId
      * */
     @RequestMapping("/pointLikeOrNot")
-    public AjaxJson pointlike(PointLike pointLike){
-        AjaxJson result = new AjaxJson();
-        int checkExisted = pointLikeService.likeOrNot(pointLike);
-        if(checkExisted == 0){
-            try{
-                pointLikeService.save(pointLike);
-                result.setSuccess(true);
-            }catch(Exception e){
-                result.setSuccess(false);
+        public AjaxJson pointlike(PointLike pointLike){
+            AjaxJson result = new AjaxJson();
+            int checkExisted = pointLikeService.likeOrNot(pointLike);
+            if(checkExisted == 1 || checkExisted == -1){
+                try{
+                    if(checkExisted == 1){
+                        pointLikeService.reLike(pointLike);
+                    }else{
+                        pointLikeService.save(pointLike);
+                    }
+                    result.setSuccess(true);
+                    result.setMessage("点赞成功");
+                }catch(Exception e){
+                    result.setSuccess(false);
+                    result.setMessage("点赞失败");
+                }
+            }else{
+                try{
+                    Map removeMap = new HashMap();
+                    removeMap.put("USER_CODE",pointLike.getUserCode());
+                    removeMap.put("VIDEO_ID",pointLike.getVideoId());
+                    pointLikeService.removeByMap(removeMap);
+                    result.setSuccess(true);
+                    result.setMessage("取消点赞成功");
+                }catch(Exception e){
+                    result.setSuccess(false);
+                    result.setMessage("取消点赞失败");
+                }
             }
-        }else{
-            try{
-                Map removeMap = new HashMap();
-                removeMap.put("USER_CODE",pointLike.getUserCode());
-                removeMap.put("VIDEO_ID",pointLike.getVideoId());
-                pointLikeService.removeByMap(removeMap);
-                result.setSuccess(true);
-            }catch(Exception e){
-                result.setSuccess(false);
-            }
+            return result;
         }
-        return result;
-    }
 
     /**
      * operation:收藏or取消收藏
@@ -135,22 +150,30 @@ public class PlayController {
     public AjaxJson addCollection(Collection collection){
         AjaxJson result = new AjaxJson();
         int checkColt = collectionService.collectOrNot(collection);
-        if(checkColt == 0){
+        if(checkColt == 1 || checkColt == -1){
             try{
-                collectionService.save(collection);
+                if(checkColt == 1){
+                    collectionService.reColt(collection);
+                }else{
+                    collectionService.save(collection);
+                }
                 result.setSuccess(true);
+                result.setMessage("收藏成功");
             }catch(Exception e){
                 result.setSuccess(false);
+                result.setMessage("收藏失败");
             }
         }else{
             try{
                 Map removeMap = new HashMap();
                 removeMap.put("USER_CODE",collection.getUserCode());
                 removeMap.put("VIDEO_ID",collection.getVideoId());
-                commentService.removeByMap(removeMap);
+                collectionService.removeByMap(removeMap);
                 result.setSuccess(true);
+                result.setMessage("取消收藏成功");
             }catch(Exception e){
                 result.setSuccess(false);
+                result.setMessage("取消收藏失败");
             }
         }
         return result;

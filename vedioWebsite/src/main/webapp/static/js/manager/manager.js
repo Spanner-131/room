@@ -7,14 +7,19 @@ $(function(){
 /**
 * 表格初始话
 * */
-function init() {
+function init(startTime,endTime,userCode) {
     layui.use('table', function () {
         var table = layui.table;
 
         table.render({
             elem: "#registerBox",
-            height: 312,
+            height: 500,
             url: '/sspu/campus/registerBox',
+            where:{
+              "startTime":startTime,
+              "endTime":endTime,
+              "userCode":userCode
+            },
             page: true, //分页
             cols: [[
                 {checkbox: true},
@@ -62,8 +67,13 @@ function init() {
 
         table.render({
             elem: "#commentBox",
-            height: 312,
+            height: 500,
             url: "/sspu/campus/commentBox",
+            where:{
+              "startTime":startTime,
+              "endTime":endTime,
+              "userCode":userCode
+            },
             page: true,
             cols: [[
                 {checkbox: true},
@@ -83,7 +93,7 @@ function init() {
                 layer.confirm('确认通过吗？',function(index){
                     var res = agreeComment(data);
                     if(res){
-                        obj.del()
+                        obj.del();
                         layer.close(index);
                         alert('评论通过！');
                         delComment(data.id);
@@ -118,25 +128,16 @@ layui.use('laydate',function () {
     })
 })
 
-function search(){
-    var createTime = $('#time');
-    var userCode = $('#code');
-    var startTime = createTime + "00:00:00";
-    var endTime = createTime + "23:59:59";
-
-    $.ajax({
-        url:'/sspu/campus/registerBox',
-        type:'post',
-        dataType:'json',
-        data:{
-            "startTime":startTime,
-            "endTime":endTime,
-            "userCode":userCode
-        },
-        success:function(){
-
-        }
-    })
+function searchBox(){
+    var createTime = $('#time').val();
+    var userCode = $('#code').val();
+    var startTime = "";
+    var endTime = "";
+    if(createTime != ""){
+        startTime = createTime + " 00:00:00";
+        endTime = createTime + " 23:59:59";
+    }
+    init(startTime,endTime,userCode);
 };
 
 function clearBox(){
@@ -208,7 +209,7 @@ function delRegister(id){
 function delComment(id){
     var res = false;
     $.ajax({
-        url:'/sspu/campus/delComment',
+        url:'/sspu/campus/delComt',
         type:'post',
         dataType: 'json',
         data:{
@@ -222,7 +223,10 @@ function delComment(id){
     return res;
 }
 
-
+function switchPage(name){
+    console.log(name);
+    $('iframe').attr('src',name);
+}
 
 
 

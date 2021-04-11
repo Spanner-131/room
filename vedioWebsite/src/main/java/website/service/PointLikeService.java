@@ -8,4 +8,7 @@ public interface PointLikeService extends IService<PointLike> {
 //    void addPointLike(PointLike pointLike);
 
     int likeOrNot(PointLike pointLike);
+
+    //修改del
+    void reLike(PointLike pointLike);
 }

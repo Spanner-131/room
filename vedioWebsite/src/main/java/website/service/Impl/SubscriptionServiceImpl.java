@@ -6,14 +6,13 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+import website.common.entity.AidData;
 import website.mapper.SubscriptionMapper;
 import website.pojo.Subscription;
 import website.service.SubscriptionService;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class SubscriptionServiceImpl extends ServiceImpl<SubscriptionMapper,Subscription> implements SubscriptionService {
@@ -39,17 +38,22 @@ public class SubscriptionServiceImpl extends ServiceImpl<SubscriptionMapper,Subs
     // 0--不存在;1--存在
     @Override
     public int subOrNot(Subscription subscription) {
-
-        int result = 0;
-        QueryWrapper<Subscription> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("USER_CODE1",subscription.getUserCode1());
-        queryWrapper.eq("USER_CODE2",subscription.getUserCode2());
-        Subscription one = subscriptionMapper.selectOne(queryWrapper);
-        if(StringUtils.isEmpty(one.getUserCode1()) || StringUtils.isEmpty(one.getUserCode2())){
-            result = 0;
-        }else{
-            result = 1;
+        int result;
+        try {
+            if(subscriptionMapper.querySubscription(subscription) == 0){
+                result = AidData.resultExist;
+            }else{
+                result = AidData.resultLgcDel;
+            }
+        }catch (Exception e){
+            result = AidData.resultNull;
         }
         return result;
+    }
+
+    //因为牵扯逻辑删除，它会默认只对没有逻辑删除的数据进行操作
+    @Override
+    public void reSubscribe(Subscription subscription) {
+        subscriptionMapper.reSubscribe(subscription);
     }
 }

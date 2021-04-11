@@ -22,9 +22,9 @@
             <div class="row">
                 <button onclick="submit()">登入</button>
             </div>
-            <%--<div class="row">--%>
-            <%--<a href="register">注册Go!</a>--%>
-            <%--</div>--%>
+            <div class="row">
+            <a href="register">注册Go!</a>
+            </div>
         </div>
     </body>
 </html>

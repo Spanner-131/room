@@ -1,10 +1,9 @@
 package website.service.Impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+import website.common.entity.AidData;
 import website.mapper.PointLikeMapper;
 import website.pojo.PointLike;
 import website.service.PointLikeService;
@@ -23,14 +22,21 @@ public class PointLikeServiceImpl extends ServiceImpl<PointLikeMapper,PointLike>
 
     @Override
     public int likeOrNot(PointLike pointLike) {
-        QueryWrapper likeWrapper = new QueryWrapper();
-        likeWrapper.eq("USER_CODE",pointLike.getUserCode());
-        likeWrapper.eq("VIDEO_ID",pointLike.getVideoId());
-        PointLike checkLike = pointLikeMapper.selectOne(likeWrapper);
-        if(StringUtils.isEmpty(checkLike.getUserCode()) || StringUtils.isEmpty(checkLike.getVideoId())){
-            return 0;
-        }else {
-            return 1;
+        int result;
+        try{
+            if(pointLikeMapper.queryLike(pointLike) == 0){
+                result = AidData.resultExist;
+            }else{
+                result = AidData.resultLgcDel;
+            }
+        }catch(Exception e){
+            result = AidData.resultNull;
         }
+        return result;
+    }
+
+    @Override
+    public void reLike(PointLike pointLike) {
+        pointLikeMapper.reLike(pointLike);
     }
 }

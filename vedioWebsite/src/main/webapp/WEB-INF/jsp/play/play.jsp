@@ -13,7 +13,6 @@
 		<div id= "videoBox">
 			<div id="videoId" style="display:none">${videoId}</div>
 			<div id="videoPlayer">
-
 			</div>
 		</div>
 		
@@ -29,6 +28,9 @@
 			</div>
 			<div id="textBox">
 				<!-- textBox 用ui -->
+                <textarea rows="6" cols="52">
+
+                </textarea>
 			</div>
 			<div id="commentBox">
 

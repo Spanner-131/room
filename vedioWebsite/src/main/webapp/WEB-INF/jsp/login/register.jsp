@@ -3,7 +3,7 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>登录</title>
+        <title>注册</title>
         <script src="../static/js/jquery/jquery.min.js"></script>
         <script src="../static/js/login/register.js"></script>
     </head>

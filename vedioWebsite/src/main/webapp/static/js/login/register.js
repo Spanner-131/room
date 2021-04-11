@@ -42,14 +42,14 @@ function register(){
                                 'phone':phone,
                                 'mail':mail
                             },
-                            success:function x(data) {
-                                if(data != 0){
-                                    alert("注册成功");
-                                }else{
-                                    alert("注册失败");
-                                    makeCheckCode();
-                                    $('#checkCode').val("");
-                                }
+                            success:function x(AjaxJson) {
+                                    alert(AjaxJson.message);
+                                    console.log(AjaxJson.success)
+                                    if(!AjaxJson.success){
+                                        alert(AjaxJson.message);
+                                        makeCheckCode();
+                                        $('#checkCode').val("");
+                                    }
                             }
                         });
                     }else{

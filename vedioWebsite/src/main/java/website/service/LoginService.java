@@ -1,6 +1,7 @@
 package website.service;
 
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import website.pojo.User;
 
 /**
@@ -10,11 +11,11 @@ import website.pojo.User;
  *  @createTime:2021/3/18
  *  @modifiedTime:2021/3/21
  * */
-public interface LoginService {
+public interface LoginService extends IService<User> {
 
     public int checkUser(String userName,String userCode,String password);
 
-    public int saveUser(User user);
+//    public int saveUser(User user);
 
     public User queryRequiredMsg(User user);
 

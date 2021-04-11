@@ -3,8 +3,8 @@
 
 <mapper namespace="website.mapper.CommentMapper">
     <select id="comList" parameterType="website.pojo.Comment" resultType="website.vo.CommentVo">
-        SELECT USER_NAME,HEAR_IMG,CONTENT,c.CREATE_TIME
-        FORM comment c,user u
+        SELECT USER_NAME,HEAD_IMG,CONTENT,c.CREATE_TIME
+        FROM comment c,user u
         WHERE c.USER_CODE = u.USER_CODE
         AND c.VIDEO_ID = #{videoId}
         ORDER BY c.CREATE_TIME DESC

@@ -2,13 +2,17 @@ package website.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import website.mapper.LoginMapper;
 import website.pojo.User;
 import website.service.LoginService;
+
+import static website.common.entity.AidData.*;
 
 /**
  *  @title：LoginServiceImpl
@@ -17,9 +21,10 @@ import website.service.LoginService;
  *  @createTime:2021/3/18
  *  @modifiedTime:2021/3/21
  * */
+@Transactional
 @Service
 @Slf4j
-public class LoginServiceImpl implements LoginService {
+public class LoginServiceImpl extends ServiceImpl<LoginMapper,User> implements LoginService {
 
     @Autowired
     LoginMapper loginMapper;
@@ -39,21 +44,21 @@ public class LoginServiceImpl implements LoginService {
         try {
             User checkUser = loginMapper.selectOne(queryWrapper);
             if (checkUser.getPassword().equals(password)) {
-                return 1;
+                if(checkUser.getIsAdmin() == 1){
+                    return isAdmin;
+                }else{
+                    return isUser;
+                }
             } else {
-                return 0;
+                return pwdWrong;
             }
         }catch(Exception err){
-            return 0;
+            return pwdWrong;
         }
     }
 
     //此处须改成 管理员导入学生信息，初始化学生用户
-    @Override
-    public int saveUser(User user) {
-        int result =  loginMapper.insert(user);
-        return result;
-    }
+    //2021.4.4 暂不改动，调用service中原有方法
 
     @Override
     public User queryRequiredMsg(User user) {

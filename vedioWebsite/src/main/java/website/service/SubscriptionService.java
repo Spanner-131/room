@@ -1,8 +1,6 @@
 package website.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import org.springframework.beans.factory.annotation.Autowired;
-import website.mapper.SubscriptionMapper;
 import website.pojo.Subscription;
 
 import java.util.List;
@@ -15,4 +13,6 @@ public interface SubscriptionService extends IService<Subscription> {
     // 有误关注，返回1/0
     int subOrNot(Subscription subscription);
 
+    //修改del
+    void reSubscribe(Subscription subscription);
 }

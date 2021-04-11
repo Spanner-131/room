@@ -3,6 +3,7 @@ package website.vo;
 import lombok.Data;
 import website.pojo.Video;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +16,8 @@ import java.util.List;
 @Data
 public class VideoVo extends Video {
 
+    private Date createTime;
+    private String createTimeStr;
     private String userName;
     private String userCode;
     private String headImg;
