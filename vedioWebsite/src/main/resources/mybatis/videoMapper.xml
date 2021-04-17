@@ -11,7 +11,7 @@
     </select>
 
     <select id="videoSubscribed" resultType="website.vo.VideoVo">
-        SELECT USER_CODE,USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
+        SELECT v.CREATE_TIME,v.USER_CODE,USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
         FROM video v
         LEFT OUTER JOIN user u
         ON v.USER_CODE = u.USER_CODE
@@ -19,6 +19,6 @@
         <foreach collection="list" item="userCode" index="index" open="(" separator="," close=")">
             #{userCode}
         </foreach>
-        ORDER BY CREATE_TIME
+        ORDER BY v.CREATE_TIME
     </select>
 </mapper>

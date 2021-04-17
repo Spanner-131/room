@@ -32,6 +32,9 @@ public class PlayController {
     CommentService commentService;
 
     @Autowired
+    CommentTempService commentTempService;
+
+    @Autowired
     VideoService videoService;
 
     /**
@@ -51,10 +54,11 @@ public class PlayController {
      * */
     //界面信息通过homepage页面modelandview跳转并返回
     @RequestMapping("/getVideo")
-    public AjaxJson getVideo(@Param("id")String id){
+    public AjaxJson getVideo(@Param("id")String id,@Param("currentUserCode")String currentUserCode){
         AjaxJson result = new AjaxJson();
+        System.out.println("当前用户id" + currentUserCode);
         try {
-            VideoVo vv = videoService.getPlayInfo(id);
+            VideoVo vv = videoService.getPlayInfo(id,currentUserCode);
             result.setSuccess(true);
             result.setData(vv);
         }catch(Exception e){
@@ -184,26 +188,17 @@ public class PlayController {
      * operation:评价
      * param: 前台session.getItem获取用户headImg,userName,content,videoId
      * */
-    @RequestMapping("/comment")
-    public AjaxJson addComment(Comment comment){
+    @RequestMapping("/addComt")
+    public AjaxJson addCommentTemp(CommentTemp commentTemp){
         AjaxJson result = new AjaxJson();
         try{
-            commentService.addComment(comment);
+            commentTempService.save(commentTemp);
             result.setSuccess(true);
+            result.setMessage("提交成功，请耐心等待审核！");
         }catch(Exception e){
             result.setSuccess(false);
+            result.setMessage("提交失败，请重新提交！");
         }
-        return result;
-    }
-
-    /**
-     * operation:展示评价
-     * param: vedioId
-     * */
-    @RequestMapping("/showComment")
-    public AjaxJson showComment(Video video){
-        AjaxJson result = new AjaxJson();
-        //三表联表查头像，时间，内容，降序排序
         return result;
     }
 

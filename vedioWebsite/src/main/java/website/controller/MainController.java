@@ -31,7 +31,7 @@ public class MainController {
     SubscriptionService subscriptionService;
 
     @RequestMapping("/homepage")
-    public ModelAndView homePage(){
+    public ModelAndView homepage(){
         return new ModelAndView("/main/main");
     }
 
@@ -51,10 +51,12 @@ public class MainController {
     @RequestMapping("/getVideoBySpt")
     public AjaxJson getVideoBySpt(@Param("userCode")String userCode){
         AjaxJson result = new AjaxJson();
+        userCode = "20171111120";
         List<Subscription> subscriptionList = subscriptionService.getUserCodeList(userCode);
         List<VideoVo> videoList = videoService.getVideoSubscribed(subscriptionList);
+        List<VideoVo> videoListPro = videoService.transTime(videoList);
         result.setSuccess(true);
-        result.setData(videoList);
+        result.setData(videoListPro);
         return result;
     }
 

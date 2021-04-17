@@ -1,20 +1,24 @@
 body,p,div,form,ul,li{
-	list-style: none;
 	margin:0px;
 	padding:0px;
+	list-style: none;
 }
-.top{
-	width:auto;
+
+.top {
+	width: auto;
 	height: 78px;
 	/*height:250px;*/
-	margin:0px auto;
+	margin: 0px auto;
 	border: solid 1px #2C6FAD;
-	background:#2C6FAD;
+	background: #2C6FAD;
 }
-.top #logo{
-	margin-top:10px;
-	float:left;
+
+/*sspu logo*/
+.top #logo {
+	float: left;
+	margin-top: 10px;
 }
+
 .top #search{
     position:absolute;
     /*margin:10px 0px 0px 1000px;*/
@@ -22,31 +26,11 @@ body,p,div,form,ul,li{
    top:18px;
 }
 
-.top .phone{
-	position: absolute;
-	/*margin:9px 0px 0px 900px;*/
-	left:1040px;
-	top:17px;	
-	display: inline-block;
-	float:left;
-}
-.top #default{
-	position:absolute;
-	/*margin:5px 0px 0px 40px;*/
-	left:1100px;
-	top:14px;
-}
-.top p{
-	color: white;
-	font:16px normal ;
-	margin:-50px 0px 0px 14px;
-	position:absolute;
-	left:1140px;
-}
 .top .drop-down{
 	/*margin:10px 0px 0px 150px;*/
 	position:absolute;
 	top:12px;
+	left:20px;
 	/*top:-68px;*/
 }
 .top .drop-down ul{
@@ -57,54 +41,24 @@ body,p,div,form,ul,li{
 .top .drop-down ul li{
 	float:left;
 	width:90px;
-	margin:10px 0px 0px 48px;
+	margin:10px 0px 0px 60px;
 	text-align: center;
 }
-.top .title{
+
+.top .drop-down ul li a {
+	text-decoration: none;
+}
+
+.top .title {
 	line-height: 18px;
-	font-size:18px;
-	color:white;
+	font: normal bold 18px "幼圆";
+	color: white;
 }
-.top .sub-title{
+
+.top .sub-title {
 	line-height: 12px;
-	font-size:12px;
-	color:white;
-}
-.zm-code{
-	width:190px;
-	/*height: 170px;*/
-	height: 0;
-	/*text-align: center;*/
-	/*font-size:12px;*/
-	background: rgba(000,000,000,0.5);
-	position:absolute;
-    left:-80px;
-    top:60px;
-    z-index: 9999;
-    overflow: hidden;
-	/*display: none;*/
-	transition: height 1s ease-in-out;
-}
- .phone:hover .zm-code{
-	display: block;  
-	height: 170px;
-}
-.zm-code #zm-code{
-	width:119px;
-	border-radius: 25px;
-	position:absolute;
-	left:30px;
-	top:20px;
-}
-/*.zm-code p{
-	float:left;
-	color:#DBBF7E;
-	text-align: center;
-}*/
-.zm-code #polo{
-	position: absolute;
-	right: -8px;
-    bottom: 8px;
+	font-size: 12px;
+	color: white;
 }
 
 .drop-down-content{
@@ -120,112 +74,147 @@ body,p,div,form,ul,li{
 	transition: height 0.5s ease-in-out;
 	overflow: hidden;
 }
+
 .drop-down-content ul{
 	width:800px;
 	position:absolute;
 }
+
 .drop-down-content ul li{
 	color:white;
 }
+
 .drop-down-content a:hover li{
 	color:#DBC083;
 }
+
 .drop-down:hover .drop-down-content{
 	/*display:block;*/
 	height: 100px;
 }
-#center{
-	margin-top:80px;
-	width:auto;
-	height:auto;
+
+/*main 主要内容*/
+#center {
+	width: 1517px;
+	height: 710px;
+	margin-top: 80px;
 }
 
-#box1{
-	height:800px;
-	width:800px;
+/*推荐视频框*/
+#box1 {
+	float: left;
+	height: 700px;
+	width: 1010px;
 	border:1px solid black;
-	float:left;
 }
 
-#box2{
-	height:800px;
+/*关注视频框*/
+#box2 {
+	float: right;
 	width:500px;
+	height:700px;
 	border:1px solid black;
-	float:left;
 }
 
-#box-scorll{
+/*轮播图*/
+#carousel{
 	height:270px;
 	width:auto;
 	border-bottom: 1px solid blue;
 }
 
-#vedio-display-bottom{
-	height:526px;
-	width:auto;
-	border:1px dashed black;
+#videos-display-bottom {
+	height: 418px;
+	width: auto;
+	border: 1px dashed black;
 }
 
-
 .squareBottom{
-	width:150px ;
+	float: left;
+	width: 150px ;
 	height: 150px;
-	border: 1px dashed darkseagreen;	
-	float:left;
+	border: 1px dashed darkseagreen;
 }
 
 .cover{
-	width:150px;
-	height:100px;
+	width: 150px;
+	height: 100px;
 }
 
-#box-title{
-	height:50px;
-	width:500px;
-	border: 1px solid black;
+/*我的关注：*/
+#box-title {
+	width: 500px;
+	height: 50px;
+	font: normal bold 30px "幼圆";
+	text-align: center;
+	vertical-align: center;
+	line-height: 50px;
+	border-bottom: 2px solid black;
+	background-color: #ff447c;
 }
 
-#vedio-display-right{
-	height:746px;
+/*视频单元框*/
+#videosRight{
+	height:650px;
 	width:auto;
-	border:1px solid black;
+	overflow: auto;
 }
 
+/*视频单元行*/
 .row{
-	width:800px;
+	width:500px;
 	height:90px;
+	border-bottom: 2px solid black;
 }
 
+/*被关注人头像*/
 .headImg{
-	border: 1px solid white;
-	border-radius: 60%;
-	width:120px;
-	height: 90px;
 	float:left;
+	width:80px;
+	height: 80px;
+	margin-top: 3px;
+	border: 2px dotted bisque;
+	border-radius: 60%;
 }
 
-.contentRight{
-	float:left;
-	width:200px;
+/*内容框*/
+.contentRight {
+	float: left;
+	width: 300px;
+	height: 90px;
 	overflow: hidden;
 }
 
-.userNameRight{
-	float:left;
-	width:150px;
+/*用户名 时间*/
+.userNameRight {
+	float: left;
+	width: 180px;
+	margin-top: 10px;
+	font: normal bold 16px "微软雅黑";
+	color: #eb7350;
+	vertical-align: center;
 }
 
-.timeRight{
-	float:right;
+/*时间*/
+.timeRight {
+	float: right;
+	margin-top: 4px;
+	font-size: 10px;
+	color: black;
 }
 
-.titleRight{
-	float:left;
-	width:150px;
+/*标题*/
+.titleRight {
+	position: relative;
+	top: 4px;
+	width: 150px;
+	height: auto;
 }
 
-.coverRight{
-	width:auto;
-	height:90px;
-	float:left;
+/*封面*/
+.coverRight {
+	float: right;
+	width: auto;
+	height: 80px;
+	margin: 3px 2px 0px 0px;
 }

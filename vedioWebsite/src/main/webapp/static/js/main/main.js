@@ -1,12 +1,40 @@
-var id = sessionStorage.getItem("");
 $(function(){
-	scroll();
-	videosDisplay();
-});
+	initCarousel();
+	getVideoBySpt();
+})
 
-function scroll(){
-	//百度一下轮播图
-	//不写js的话，就还有css实现
+function getCurrentUserCode(){
+	var currentUserCode = sessionStorage.getItem('currentUserCode');
+	if(currentUserCode == "") {
+		var currentUserName = sessionStorage.getItem('currentUserName');
+		$.ajax({
+			url: '/sspu/campus/init',
+			type: 'get',
+			dataType: 'json',
+			data: {
+				'userName': currentUserName,
+				'userCode': ''
+			},
+			success: function (AjaxJson) {
+				currentUserCode = AjaxJson.data.userCode;
+			}
+		})
+	}
+	return currentUserCode;
+}
+
+function initCarousel(){
+	layui.use('carousel',function () {
+		var carousel = layui.carousel;
+
+		carousel.render({
+			elem: '#carousel',
+			width: '100%',
+			arrow: 'always',
+			anim: 'leftright',
+			interval: '5000'
+		});
+	});
 }
 
 function videosDisplay(){
@@ -19,14 +47,6 @@ function videosDisplay(){
 		},
 		success:function(data){
 			//遍历data
-			//右侧关注
-			var videoRightHtml = '<a href="' + data.url +'"><div class="row"> \
-			<div class ="squareRight"> <img src="' + data.coverUrl + '" /></div> \
-			<div class="titleRight">'+ data.title + '</div> \
-			<div class="userNameRight">' + data.userName + '</div> \
-			<div class="timeRight">'+ data.createTime +'</div> \
-			</div></a>';
-			$('#vedio-display-right').html(videoRightHtml);
 			
 			//下侧视频
 			var videoBottomHtml = '<a href="' + data.url +'"><div class="row"> \
@@ -35,6 +55,33 @@ function videosDisplay(){
 			<div class="userNameBottom">' + data.userName + '</div> \
 			</div></a>';
 			$('#vedio-display-bottom').html(vedioBottomHtml);
+		}
+	})
+}
+
+function getVideoBySpt(){
+	var currentUserCode = getCurrentUserCode();
+	$.ajax({
+		url:'getVideoBySpt',
+		type:'post',
+		dataType: 'json',
+		data:{
+			"userCode": currentUserCode,
+		},
+		success:function(AjaxJson){
+			//右侧关注
+			var videoRightHtml = ''
+			for(i = 0;i < AjaxJson.data.length;i++){
+				var content = '<div class="row"> \
+							   <img class="headImg" src="../static/img/'+ AjaxJson.data[i].headImg + '"/> \
+							   <div class="contentRight"> \
+							   <div class="userNameRight">' + AjaxJson.data[i].userName + '<div class="timeRight">'
+			    	           	+ AjaxJson.data[i].createTimeStr + '</div></div> \
+			    	           <div class="titleRight">Title:&emsp;' + AjaxJson.data[i].title + '</div></div> \
+			     	           <img class="coverRight" src="../static/img/' + AjaxJson.data[i].coverUrl + '"/></div>';
+				videoRightHtml += content;
+			}
+			$('#videosRight').html(videoRightHtml);
 		}
 	})
 }

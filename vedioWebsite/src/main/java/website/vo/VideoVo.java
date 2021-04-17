@@ -34,4 +34,11 @@ public class VideoVo extends Video {
     private int subAmount;
     //视频数
     private int vdoAmount;
+
+    //是否关注
+    private int isSubscribed;
+    //是否点赞
+    private int isLiked;
+    //是否收藏
+    private int isCollected;
 }

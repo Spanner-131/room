@@ -5,7 +5,9 @@
 	<meta charset="utf-8"/>
 	<title>视频播放</title>
 	<link href="../../static/css/play/play.css"  rel="stylesheet" type="text/css">
+<%--	<link rel="stylesheet" href="../../static/js/layui/css/layui.css">--%>
 	<script src="../../static/js/jquery/jquery.min.js"></script>
+	<script src="../../static/js/layui/layui.js"></script>
 	<script src="../../static/js/play/play.js"></script>
 </head>
 <body>
@@ -28,9 +30,10 @@
 			</div>
 			<div id="textBox">
 				<!-- textBox 用ui -->
-                <textarea rows="6" cols="52">
+                <textarea rows="4" cols="37">
 
                 </textarea>
+				<button id="comtSubmit" onclick="submitConfirm()">提交</button>
 			</div>
 			<div id="commentBox">
 
