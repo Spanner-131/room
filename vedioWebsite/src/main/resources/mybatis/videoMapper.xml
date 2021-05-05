@@ -8,10 +8,11 @@
         FROM video v,user u
         WHERE v.USER_CODE = u.USER_CODE
         AND v.USER_CODE = #{userCode}
+        AND v.ID = #{id}
     </select>
 
     <select id="videoSubscribed" resultType="website.vo.VideoVo">
-        SELECT v.CREATE_TIME,v.USER_CODE,USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
+        SELECT v.id,v.CREATE_TIME,v.USER_CODE,USER_NAME,HEAD_IMG,URL,TITLE,DESCRIPTION,COVER_URL
         FROM video v
         LEFT OUTER JOIN user u
         ON v.USER_CODE = u.USER_CODE
@@ -21,4 +22,62 @@
         </foreach>
         ORDER BY v.CREATE_TIME
     </select>
+
+    <select id="queryLike" resultType="website.vo.VideoVo">
+        SELECT v.ID,v.TITLE,u.USER_NAME,COUNT(*) AS AMOUNT,u.USER_CODE,u.HEAD_IMG,v.CREATE_TIME,v.TITLE,v.COVER_URL,v.URL,v.ID,TAG1,TAG2,TAG3,TAG4,TAG5,TAG6
+        FROM video v,point_like p,user u
+        WHERE v.USER_CODE = u.USER_CODE
+        AND v.ID = p.VIDEO_ID
+        <if test="userCode != null and userCode != '' ">
+            AND p.USER_CODE = #{userCode}
+        </if>
+        GROUP BY v.ID
+        ORDER BY AMOUNT DESC
+    </select>
+
+    <select id="queryColt" resultType="website.vo.VideoVo">
+        SELECT v.ID,v.TITLE,u.USER_NAME,COUNT(*) AS AMOUNT,u.USER_CODE,u.HEAD_IMG,v.CREATE_TIME,v.TITLE,v.COVER_URL,v.URL,v.ID,TAG1,TAG2,TAG3,TAG4,TAG5,TAG6
+        FROM video v,collection c,user u
+        WHERE v.USER_CODE = u.USER_CODE
+        AND v.ID = c.VIDEO_ID
+        <if test="userCode != null and userCode != '' ">
+            AND c.USER_CODE = #{userCode}
+        </if>
+        GROUP BY v.ID
+        ORDER BY AMOUNT DESC
+    </select>
+
+    <select id="queryComt" resultType="website.vo.VideoVo">
+        SELECT v.ID,v.TITLE,u.USER_NAME,COUNT(*) AS AMOUNT,u.USER_CODE,u.HEAD_IMG,v.CREATE_TIME,v.TITLE,v.COVER_URL,v.URL,v.ID,TAG1,TAG2,TAG3,TAG4,TAG5,TAG6
+        FROM video v,comment c,user u
+        WHERE v.USER_CODE = u.USER_CODE
+        AND v.ID = c.VIDEO_ID
+        <if test="userCode != null and userCode != '' ">
+            AND c.USER_CODE = #{userCode}
+        </if>
+        GROUP BY v.ID
+        ORDER BY AMOUNT DESC
+    </select>
+
+    <select id="queryTag" parameterType="website.vo.VideoVo" resultType="website.pojo.Video">
+        SELECT ID,TAG1,TAG2,TAG3,TAG4,TAG5,TAG6
+        FROM video
+        WHERE ID IN
+        <foreach collection="list" item="VideoVo" index="index" open="(" separator="," close=")">
+            #{VideoVo.id}
+        </foreach>
+    </select>
+
+    <sql id="tagForeach">
+        <foreach collection="list" item="tag" index="index" open="(" separator="," close=")">
+            #{tag}
+        </foreach>
+    </sql>
+
+    <select id="queryAllVideoInfo" resultType="website.vo.VideoVo">
+        SELECT u.USER_NAME,u.USER_CODE,u.HEAD_IMG,v.CREATE_TIME,v.TITLE,v.COVER_URL,v.URL,v.ID,TAG1,TAG2,TAG3,TAG4,TAG5,TAG6
+        FROM video v,user u
+        WHERE v.USER_CODE = u.USER_CODE
+    </select>
+
 </mapper>

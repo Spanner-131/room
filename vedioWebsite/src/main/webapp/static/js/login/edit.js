@@ -6,7 +6,7 @@ $(function () {
     //     var userName = id;
     // }
     var currentUserName = sessionStorage.getItem('currentUserName');
-    var currentUserCode = sessionStorage.getItem('currentUserCode')
+    var currentUserCode = sessionStorage.getItem('currentUserCode');
     $.ajax({
         url:'init',
         type:'get',

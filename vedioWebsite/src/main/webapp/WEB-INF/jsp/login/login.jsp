@@ -20,10 +20,10 @@
                 <label>验证码：</label><input type="text" id="checkCode" name="checkCode" placeholder="输入验证码"/><button id="makeCkCode" onclick="makeCheckCode()"></button>
             </div>
             <div class="row">
-                <button onclick="submit()">登入</button>
+                <button id="submit" onclick="submit()">登入</button>
             </div>
             <div class="row">
-            <a href="register">注册Go!</a>
+            <a id="register" href="register">注册Go!</a>
             </div>
         </div>
     </body>

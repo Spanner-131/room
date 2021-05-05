@@ -6,7 +6,7 @@ div,p,ul,ol{
 
 /*视频大盒子*/
 #videoBox{
-	width:1080px;
+	width:1076px;
 	height:606px;
 	border:1px solid black;
 	float:left;
@@ -22,7 +22,7 @@ div,p,ul,ol{
 /*视频大小*/
 video{
 	float:left;
-	width:1080px;
+	width:1078px;
 	height:606px;
 }
 /*用户信息小盒子*/
@@ -126,23 +126,36 @@ video{
 
 /*小盒子*/
 .funcbox{
+	float:left;
 	margin:10px 0px 0px 10px;
 	height:35px;
-	float:left;
 }
 
 /*点赞 收藏 评价 按钮*/
 .funcButton{
 	width:38px;
 	height:32px;
+	border: none;
+	background-color: white;
+}
+
+/*按钮图片尺寸*/
+.icon {
+	position: relative;
+	top: -2px;
+	left: -5px;
+	width: 30px;
+	height: 28px;
 }
 
 /*对应数字*/
 .num{
 	position:relative;
-	top:25px;
-	left:-31px;
+	width: 36px;
+	margin: 0 auto;
 	font:normal normal 12px "幼圆";
+	text-align: center;
+	display: block;
 }
 
 #textBox{

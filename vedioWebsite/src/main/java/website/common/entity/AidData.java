@@ -13,6 +13,8 @@ public class AidData {
     public static final int isAdmin = 2;
 
     //订阅 收藏 点赞样式变化用
+    //tag
     public static final int isExist = 1;
     public static final int notExist = 0;
+
 }

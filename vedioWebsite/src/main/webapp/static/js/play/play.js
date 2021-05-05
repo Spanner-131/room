@@ -1,7 +1,7 @@
 $(function(){
 	//初始化视频信息
 	var videoId = $('#videoId').html();
-	console.log(videoId);
+	console.log('videoId:' + videoId);
 	videoGo(videoId);
 	$('textarea').val("");
 });
@@ -38,8 +38,9 @@ function videoGo(videoId){
 			'currentUserCode': currentUserCode
 		},
 		success:function(AjaxJson){
-		    var videoSrc = '<video ishivideo="true" autoplay="true" isrotate="true" autoHide="true" controls="controls"> \
-		    <source src="' + AjaxJson.data.url + '" type="video/mp4"/></video>'
+			// $('source').attr('src','../../static/video/' + AjaxJson.data.url);
+		    var videoSrc = '<video id="newVideo" ishivideo="true" autoplay="true" isrotate="true" autoHide="true" controls="controls"> \
+		    <source src="../../static/video/' + AjaxJson.data.url + '" type="video/mp4"/></video>'
             $('#videoPlayer').html(videoSrc);
 
 			var userInfo = '<img id="headImg" src="../../static/img/' + AjaxJson.data.headImg + '" /> \
@@ -56,9 +57,9 @@ function videoGo(videoId){
 			<div class="browseInfo">视频号:' + videoId + '</div>'
 			$('#videoInfo').html(videoInfo);
 
-			var funBoxContent = '<div class="funcbox"><button class="funcButton"  onclick="like()">点</button><span class="num">' + AjaxJson.data.likeAmount + '</span></div> \
-			                     <div class="funcbox"><button class="funcButton"  onclick="collect()">收</button><span class="num">' + AjaxJson.data.coltAmount + '</span></div> \
-			                     <div class="funcbox"><button class="funcButton"  id="comtButton" value="1" onclick="showTextBox(this.value)">评</button><span class="num">' + AjaxJson.data.cmtAmount + '</span></div> '
+			var funBoxContent = '<div class="funcbox"><button class="funcButton"  id="likeButton" onclick="like()"></button><span class="num">' + AjaxJson.data.likeAmount + '</span></div> \
+			                     <div class="funcbox"><button class="funcButton"  id="coltButton" onclick="collect()"></button><span class="num">' + AjaxJson.data.coltAmount + '</span></div> \
+			                     <div class="funcbox"><button class="funcButton"  id="comtButton" value="1" onclick="showTextBox(this.value)"><img class="icon" src="../../static/img/icon/initComt.png"/></button><span class="num">' + AjaxJson.data.cmtAmount + '</span></div> '
 			$('#funBox').html(funBoxContent);
 
 			var commentBoxContent = '<div id="comTitle">评论</div>'
@@ -74,13 +75,23 @@ function videoGo(videoId){
 			}
 			$('#commentBox').html(commentBoxContent);
 
+			// 判断 关注
 			if(AjaxJson.data.isSubscribed == '1'){
 				$('#subscribe').attr('style','color: white; background-color: #eb7350;');
 			}else{
 				$('#subscribe').attr('style','color: black; background-color: white;');
 			}
+			// 判断 点赞
 			if(AjaxJson.data.isLiked == '1'){
-
+				$('#likeButton').html('<img class="icon" src="../../static/img/icon/like.png">');
+			}else{
+				$('#likeButton').html('<img class="icon" src="../../static/img/icon/initLike.png"/>');
+			}
+			// 判断 收藏
+			if(AjaxJson.data.isCollected == '1'){
+				$('#coltButton').html('<img class="icon" src="../../static/img/icon/colt.png">');
+			}else{
+				$('#coltButton').html('<img class="icon" src="../../static/img/icon/initColt.png"	>');
 			}
 		}
 	})
@@ -122,6 +133,11 @@ function like(){
 		},
 		success:function (AjaxJson) {
 			alert(AjaxJson.message);
+			if(AjaxJson.message == '点赞成功'){
+				$('#likeButton').html('<img class="icon" src="../../static/img/icon/like.png">');
+			}else{
+				$('#likeButton').html('<img class="icon" src="../../static/img/icon/initLike.png"/>');
+			}
 		}
 	})
 }
@@ -139,6 +155,11 @@ function collect(){
 		},
 		success:function (AjaxJson) {
 			alert(AjaxJson.message);
+			if(AjaxJson.message == '收藏成功'){
+				$('#coltButton').html('<img class="icon" src="../../static/img/icon/colt.png">');
+			}else{
+				$('#coltButton').html('<img class="icon" src="../../static/img/icon/initColt.png">');
+			}
 		}
 	})
 }
@@ -146,9 +167,11 @@ function collect(){
 function showTextBox(value){
 	if(value == '1'){
 		$('#textBox').show();
+		$('#comtButton').html('<img class="icon" src="../../static/img/icon/comt.png">');
 		$('#comtButton').val('0');
 	}else{
 		$('#textBox').hide();
+		$('#comtButton').html('<img class="icon" src="../../static/img/icon/initComt.png">')
 		$('#comtButton').val('1');
 	}
 }
@@ -190,4 +213,42 @@ function submit() {
 	})
 	return res;
 }
+
+// window.onload = function () {
+// 	var newVideo = document.getElementById('newVideo');
+// 	console.log(newVideo);
+// 	var tol = newVideo.duration;
+// 	console.log(tol);
+// 	newVideo.addEventListener('timeupdate',function() {
+// 		var currentTime = newVideo.currentTime;
+// 		console.log(currentTime);
+// 	})
+//
+// 	// 暂时不用
+// 	function playBySeconds(num) {
+// 		newVideo.currentTime = num;
+// 	}
+// }
+
+// 根据地址获取经纬度 2021.04.21测试接口，先放这里
+function getLocation() {
+	let that = this
+	console.log(that.project_location)
+	let data = {
+		key: '9eccd11e86da324e94d86f80133f05ac',
+		address: '浦东新区博山路51弄40号106室'
+	}
+	$.ajax({
+		url: 'https://restapi.amap.com/v3/geocode/geo',
+		type: 'get',
+		dataType: 'jsonp',
+		data,
+		success: function (data) {
+			// console.log(data.geocodes[0].location)//获取到的经纬度
+			console.log(data)
+		}
+	})
+}
+
+
 

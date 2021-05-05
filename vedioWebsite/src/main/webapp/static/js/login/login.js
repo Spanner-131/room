@@ -41,9 +41,9 @@ function submit(){
                 if(data == 1){
                     alert("登入成功");
                     // 有空自己弄下shiro
-                    if(userName != ""){
+                    if(userName != "" && userName != null){
                         sessionStorage.setItem('currentUserName',userName);
-                    }else if(userCode !=null){
+                    }else if(userCode !=null && userCode != ""){
                         sessionStorage.setItem('currentUserCode',userCode);
                     }
                     window.location.href = 'homepage';

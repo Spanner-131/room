@@ -15,4 +15,12 @@
         WHERE USER_CODE = #{userCode}
           AND VIDEO_ID = #{videoId}
     </update>
+
+    <select id="queryTop10" parameterType="String" resultType="website.pojo.PointLike">
+        SELECT VIDEO_ID,count(*) AS AMOUNT
+        FROM point_like
+        WHERE USER_CODE = #{userCode}
+        GROUP BY VIDEO_ID
+        ORDER BY AMOUNT
+    </select>
 </mapper>

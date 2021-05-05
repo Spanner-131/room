@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import website.common.entity.AjaxJson;
 import website.pojo.User;
+import website.pojo.UserTemp;
 import website.service.LoginService;
+import website.service.UserTempService;
 
 /**
  *  @title:loginController
@@ -22,6 +24,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private UserTempService userTempService;
 
     //test interface
     @RequestMapping("/hi")
@@ -48,15 +53,15 @@ public class LoginController {
 
     //2021.4.4 modify
     @RequestMapping("/addUser")
-    public AjaxJson addUser(User user){
+    public AjaxJson addUser(UserTemp userTemp){
         AjaxJson result = new AjaxJson();
         try{
-            loginService.save(user);
+            userTempService.save(userTemp);
             result.setSuccess(true);
-            result.setMessage("注册成功");
+            result.setMessage("信息已录入，等待管理员审核通过");
         }catch(Exception e){
             result.setSuccess(false);
-            result.setMessage("注册失败，请重新尝试");
+            result.setMessage("未录入成功，请重新操作");
         }
         return result;
     }

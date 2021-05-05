@@ -16,6 +16,7 @@ import java.util.List;
 @Data
 public class VideoVo extends Video {
 
+    private Long id;
     private Date createTime;
     private String createTimeStr;
     private String userName;

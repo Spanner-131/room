@@ -11,6 +11,7 @@ import website.service.SubscriptionService;
 import website.service.VideoService;
 import website.vo.VideoVo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,12 +37,24 @@ public class MainController {
     }
 
     @RequestMapping("/getRecdVideo")
-    public AjaxJson getRecdVideo(){
+    public AjaxJson getRecdVideo(@Param("userCode")String userCode){
         AjaxJson result = new AjaxJson();
         try{
-        List<VideoVo> videoList = videoService.getRecdVideoInfo();
-        result.setSuccess(true);
-        result.setData(videoList);
+            List<VideoVo> list = new ArrayList();
+            List<VideoVo> recdVideoByTag = videoService.getRecdVideoByTag(userCode);
+            List<VideoVo> comRec = videoService.commonRecdVideo();
+            for (VideoVo videoVo : recdVideoByTag) {
+                list.add(videoVo);
+            }
+            for (VideoVo vv : list){
+                for(VideoVo videoVo : comRec){
+                    if(!vv.getId().equals(videoVo.getId())){
+                        list.add(videoVo);
+                    }
+                }
+            }
+            result.setSuccess(true);
+            result.setData(list);
         }catch (Exception e){
             result.setSuccess(false);
         }
@@ -51,7 +64,6 @@ public class MainController {
     @RequestMapping("/getVideoBySpt")
     public AjaxJson getVideoBySpt(@Param("userCode")String userCode){
         AjaxJson result = new AjaxJson();
-        userCode = "20171111120";
         List<Subscription> subscriptionList = subscriptionService.getUserCodeList(userCode);
         List<VideoVo> videoList = videoService.getVideoSubscribed(subscriptionList);
         List<VideoVo> videoListPro = videoService.transTime(videoList);
@@ -59,5 +71,4 @@ public class MainController {
         result.setData(videoListPro);
         return result;
     }
-
 }

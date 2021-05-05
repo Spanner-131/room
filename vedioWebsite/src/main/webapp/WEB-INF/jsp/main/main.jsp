@@ -37,7 +37,7 @@
         <span class="sub-title">MAP</span>
         </a></li>
         <li>
-
+            <a id="quit" onclick="">退出</a>
         </li>
         </ul>
 <%--        <div class="drop-down-content">--%>
@@ -66,70 +66,7 @@
                 </div>
 			</div>
 			<div id = "videos-display-bottom">
-					<div class="rowBottom">
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-					</div>
-					<div class="rowBottom">
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-						<div class="squareBottom">
-							<img class="cover" src="../static/img/ASH.png"/>
-							<div class="titleBottom">ash</div>
-							<div class="useNameBottom">hb</div>
-						</div>
-					</div>
+
 			</div>
 		</div>
 		

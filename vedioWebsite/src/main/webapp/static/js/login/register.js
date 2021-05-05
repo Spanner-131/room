@@ -1,7 +1,18 @@
 // init
 $(function () {
+    initInputbox();
     makeCheckCode();
 })
+
+function initInputbox() {
+    $('#userName').val('');
+    $('#realName').val('');
+    $('#pwd').val('');
+    $('#userCode').val('');
+    $('#phone').val('');
+    $('#mail').val('');
+    $('#checkCode').val('');
+}
 
 // checkcode
 function makeCheckCode(){
@@ -17,6 +28,7 @@ function makeCheckCode(){
 // submit
 function register(){
     var userName = $('#userName').val();
+    var realName = $('#realName').val();
     var password = $('#pwd').val();
     var userCode = $('#userCode').val();
     var phone = $('#phone').val();
@@ -37,6 +49,7 @@ function register(){
                             datatype:'json',
                             data:{
                                 'userName':userName,
+                                'realName':realName,
                                 'password':password,
                                 'userCode':userCode,
                                 'phone':phone,
@@ -44,11 +57,12 @@ function register(){
                             },
                             success:function x(AjaxJson) {
                                     alert(AjaxJson.message);
-                                    console.log(AjaxJson.success)
                                     if(!AjaxJson.success){
                                         alert(AjaxJson.message);
                                         makeCheckCode();
-                                        $('#checkCode').val("");
+                                        $('#checkCode').val('');
+                                    }else{
+                                        window.location.href = 'homepage';
                                     }
                             }
                         });
