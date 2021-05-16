@@ -4,115 +4,148 @@ body,p,div,form,ul,li{
 	list-style: none;
 }
 
+/* body 宽 高*/
+body {
+	width: 100%;
+	/*height: 1080px;*/
+}
+
+/* header nav*/
 .top {
-	width: auto;
-	height: 78px;
-	/*height:250px;*/
-	margin: 0px auto;
-	border: solid 1px #2C6FAD;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 80px;
 	background: #2C6FAD;
 }
 
-/*sspu logo*/
+/* sspu logo*/
 .top #logo {
-	float: left;
-	margin-top: 10px;
-}
-
-.top #search{
-    position:absolute;
-    /*margin:10px 0px 0px 1000px;*/
-   left:960px;
-   top:18px;
-}
-
-.top .drop-down{
-	/*margin:10px 0px 0px 150px;*/
-	position:absolute;
-	top:12px;
-	left:20px;
-	/*top:-68px;*/
-}
-.top .drop-down ul{
-	position:absolute;
-	left:180px;
-	width:800px;
-}
-.top .drop-down ul li{
-	float:left;
-	width:90px;
-	margin:10px 0px 0px 60px;
-	text-align: center;
-}
-
-.top .drop-down ul li a {
-	text-decoration: none;
-}
-
-.top .title {
-	line-height: 18px;
-	font: normal bold 18px "幼圆";
-	color: white;
-}
-
-.top .sub-title {
-	line-height: 12px;
-	font-size: 12px;
-	color: white;
-}
-
-.drop-down-content{
-	/*display:none;*/
 	position: relative;
-	z-index: 9999;
-	background: rgba(000,000,000,0.5);
-	height:0px;
-	width:1637px;
-	top:72px;
-	color: white;
-	left:0px;
-	transition: height 0.5s ease-in-out;
+	width: 250px;
+	/*width: 16%;*/
+	height: 100%;
 	overflow: hidden;
 }
 
-.drop-down-content ul{
-	width:800px;
-	position:absolute;
+/* sspu logo img*/
+.top #logo img {
+	position: absolute;
+	width: 250px;
+	height: 73.3px;
 }
 
-.drop-down-content ul li{
-	color:white;
+/* 导航栏 盒子*/
+.top .drop-down{
+	position: absolute;
+	top: 0;
+	left: 250px;
+	width: 60%;
+	height: 100%;
+	overflow: hidden;
 }
 
-.drop-down-content a:hover li{
-	color:#DBC083;
+/* 无序列表 设置*/
+.top .drop-down ul{
+	width: 100%;
+	height: 100%;
 }
 
-.drop-down:hover .drop-down-content{
-	/*display:block;*/
-	height: 100px;
+/* li */
+.top .drop-down ul li{
+	width:90px;
+	margin:20px 0px 0px 60px;
+}
+
+/* 头像框 */
+.top #headImg {
+	position: absolute;
+	top: 0;
+	right: 5%;
+	z-index: 9999;
+	width: 74px;
+	height: 74px;
+	border: 3px solid white;
+	border-radius: 60%;
+	box-shadow: 0 1px 10px rgb(0,0,0,0.1);
+}
+
+/* 头像 大小 设置*/
+.top #headImg #navInfo img {
+	width: 74px;
+	height: 74px;
+	border-radius: 60%;
+}
+
+/* 信息框 */
+.top #headImg #navInfo ul {
+	position: relative;
+	top: 10px;
+	left: -10px;
+	width: 100px;
+	/*height: 120px;*/
+	height: 0;
+	border: none;
+	border-radius: 19px;
+	background-color: white;
+	box-shadow: 0 1px 10px rgb(0,0,0,0.1);
+	transition: 1s ease-in-out;
+	overflow: hidden;
+}
+
+/* 信息框 li */
+.top #headImg #navInfo ul li {
+	margin-top: 17px;
+	font-size: 16px;
+	color: white;
+	line-height: 16px;
+}
+
+/* 信息框 覆盖 */
+.top #headImg #navInfo img:hover+ul,.top #headImg #navInfo ul:hover{
+	height: 120px;
+}
+
+/* 第一行 中文标题*/
+.top .title {
+	font: normal bold 18px "幼圆";
+	color: white;
+	line-height: 18px;
+}
+
+/* 第二行 英文标题*/
+.top .sub-title {
+	font-size: 12px;
+	color: white;
+	line-height: 12px;
 }
 
 /*main 主要内容*/
 #center {
-	width: 1517px;
-	height: 710px;
-	margin-top: 80px;
+	position: relative;
+	left: 0;
+	width: 100%;
+	height: 700px;
+	overflow: hidden;
 }
 
 /*推荐视频框*/
 #box1 {
-	float: left;
-	height: 700px;
-	width: 1010px;
+	position: absolute;
+	left: 0px;
+	width: 66%;
+	height: 100%;
+	border: none;
 	box-shadow: 0px 1px 10px rgb(0,0,0,0.2);
 }
 
 /*关注视频框*/
 #box2 {
-	float: right;
-	width:500px;
-	height:700px;
+	position: absolute;
+	left: 66%;
+	width: 34%;
+	height: 100%;
+	border: 1px solid rgb(0,0,0,0.1);
 	box-shadow: 0px 1px 10px rgb(0,0,0,0.2);
 }
 
@@ -192,7 +225,7 @@ body,p,div,form,ul,li{
 
 /*我的关注：*/
 #box-title {
-	width: 500px;
+	width: 100%;
 	height: 50px;
 	margin-bottom: 1px;
 	font: normal bold 30px "幼圆";
@@ -213,9 +246,9 @@ body,p,div,form,ul,li{
 
 /*视频单元行*/
 .row{
-	width:500px;
-	height:90px;
-	border-bottom: 2px solid black;
+	width: 100%;
+	height: 90px;
+	border-bottom: 2px solid rgb(0,0,0,0.1);
 }
 
 /*被关注人头像*/

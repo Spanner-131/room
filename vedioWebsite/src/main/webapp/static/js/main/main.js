@@ -2,6 +2,7 @@ $(function(){
 	initCarousel();
 	videosDisplay();
 	getVideoBySpt();
+	getCurrentUserInfo();
 })
 
 function getCurrentUserCode(){
@@ -23,6 +24,34 @@ function getCurrentUserCode(){
 		})
 	}
 	return currentUserCode;
+}
+
+// 获取 头像 给nav用
+function getCurrentUserInfo(){
+	var currentUserCode = getCurrentUserCode();
+	$.ajax({
+		url: 'getCurrentUserInfo',
+		type: 'post',
+		dataType: 'json',
+		data: {
+			userCode: currentUserCode,
+		},
+		success: function (AjaxJson) {
+			if(AjaxJson.data != null){
+				var navInfoHtml = '<div id="navInfo"><img src="../static/img/'+ AjaxJson.data.headImg +'" alt="请登录"> \
+									<ul><li class="ac"><a href="javascript:void(0)">个人资料</a></li> \
+									<li class="ac"><a href="javascript:void(0)">更新日志</a></li> \
+									<li class="ac"><a href="javascript:void(0)" onclick="quitCurrentUser()">退出</a></li></ul></div>';
+				$('#headImg').html(navInfoHtml);
+			}
+		}
+	})
+}
+
+// 退出当前用户
+function quitCurrentUser() {
+	sessionStorage.setItem('currentUserCode','');
+	window.location.reload();
 }
 
 function initCarousel(){

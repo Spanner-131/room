@@ -22,5 +22,7 @@ public class Comment extends BaseEntity {
     //关联用
     private String videoId;
     private String userCode;
+
+    private Integer isTemp;
 //
 }

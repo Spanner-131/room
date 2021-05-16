@@ -1,0 +1,23 @@
+.fl {
+    float: left;
+}
+
+.fr {
+    float: right;
+}
+
+.tn {
+    text-decoration: none;
+}
+
+.ac {
+    text-align: center;
+}
+
+.db {
+    display: block;
+}
+
+.dn {
+    display: none;
+}

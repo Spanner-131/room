@@ -2,12 +2,14 @@ $(function(){
     init();
     $('#time').val('');
     $('#code').val('');
+    // var winHeight = $(window).height();
+    // $('body').attr('style','height:'+ winHeight);
 })
 
 /**
 * 表格初始话
 * */
-function init(startTime,endTime,userCode) {
+function init(startTime,endTime,userCode,realName) {
     layui.use('table', function () {
         var table = layui.table;
 
@@ -44,7 +46,7 @@ function init(startTime,endTime,userCode) {
                             obj.del()
                             layer.close(index);
                             alert('用户注册通过');
-                            delRegister(data.id);
+                            // delRegister(data.id);
                         }else{
                             layer.close(index);
                             alert('通过失败，请重新操作');
@@ -96,7 +98,7 @@ function init(startTime,endTime,userCode) {
                         obj.del();
                         layer.close(index);
                         alert('评论通过！');
-                        delComment(data.id);
+                        // delComment(data.id);
                     }else{
                         layer.close(index);
                         alert('评论通过失败，请重新操作');
@@ -116,6 +118,59 @@ function init(startTime,endTime,userCode) {
                 })
             }
         });
+
+        table.render({
+            elem: '#userBox',
+            height: 500,
+            url: 'userBox',
+            where: {
+                "startTime": startTime,
+                "endTime": endTime,
+                "userCode": userCode,
+                "realName": realName
+            },
+            page: true,
+            cols: [[
+                {checkbox: true},
+                {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left', hide: true},
+                {field: 'userName', title: '用户名', width: 80},
+                {field: 'realName', title: '姓名', width: 80},
+                {field: 'userCode', title: '学号', width: 120},
+                {field: 'phone', title: '手机号', width: 120},
+                {field: 'mail', title: '邮箱', width: 180},
+                {field: 'role',title: '身份',width: 100},
+                {field: '', title: '操作', toolbar: '#userBar', width: 120}
+            ]]
+        })
+
+        table.on('tool(test3)',function(obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            if(layEvent = "role") {
+                layer.open({
+                    type: 2,
+                    area:['20%','20%'],
+                    title: '用户权限',
+                    content: 'setRole/' + data.id,
+                    btn:['确认','取消'],
+                    yes: function(index,layero){
+                        var form = $(window.frames["layui-layer-iframe" + index].document).contents().find("#infoForm");
+                        form.ajaxSubmit({
+                            url:'/sspu/campus/updateRole',
+                            type: 'post',
+                            dataType: 'json',
+                            success: function(AjaxJson){
+                                layer.close(index);
+                                alert(AjaxJson.message);
+                            }
+                        })
+                    },
+                    btn2: function (index) {
+                        layer.close(index)
+                    }
+                })
+            }
+        })
     })
 }
 
@@ -131,13 +186,14 @@ layui.use('laydate',function () {
 function searchBox(){
     var createTime = $('#time').val();
     var userCode = $('#code').val();
+    var realName = $('#realName').val();
     var startTime = "";
     var endTime = "";
     if(createTime != ""){
         startTime = createTime + " 00:00:00";
         endTime = createTime + " 23:59:59";
     }
-    init(startTime,endTime,userCode);
+    init(startTime,endTime,userCode,realName);
 };
 
 function clearBox(){
@@ -153,14 +209,15 @@ function agreeRegister(data){
         dataType:'json',
         type:'post',
         data:{
-            'headImg':data.headImg,
-            'isAdmin':data.isAdmin,
-            'mail':data.mail,
-            'password':data.password,
-            'phone':data.phone,
-            'realName':data.realName,
-            'userCode':data.userCode,
-            'userName':data.userName
+            'id': data.id,
+            'headImg': data.headImg,
+            'isAdmin': data.isAdmin,
+            'mail': data.mail,
+            'password': data.password,
+            'phone': data.phone,
+            'realName': data.realName,
+            'userCode': data.userCode,
+            'userName': data.userName
         },
         async:false,
         success:function(AjaxJson){
@@ -177,9 +234,10 @@ function agreeComment(data){
         dataType:'json',
         type:'post',
         data:{
-            'userCode':data.userCode,
-            'videoId':data.videoId,
-            'content':data.content
+            'id': data.id,
+            'userCode': data.userCode,
+            'videoId': data.videoId,
+            'content': data.content
         },
         async:false,
         success:function(AjaxJson){

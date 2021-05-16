@@ -16,7 +16,7 @@
         <button class="button" id="search" onclick="searchBox()">查询</button>
         <button class="button" id="clear" onclick="clearBox()">重置</button>
     </div>
-    <table id="commentBox" lay-filter="test1"></table>
+    <table id="commentBox" lay-filter="test2"></table>
 </body>
 
 <script type="text/html" id="commentBar">

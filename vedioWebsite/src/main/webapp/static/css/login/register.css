@@ -1,0 +1,91 @@
+div,p,ul,ol{
+    text-decoration: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+body {
+    width: 100%;
+    background-color: #009688;
+}
+
+.registerBox{
+    width: 600px;
+    height: 600px;
+    margin: 0 auto;
+    padding-top: 30px;
+    background-color: #eb7350;
+    border-radius: 9px;
+    box-shadow: rgb(255,255,255,0.9);
+}
+
+.row {
+    width: 300px;
+    height: 40px;
+    margin: 20px auto 0 auto;
+}
+
+label{
+    line-height: 18px;
+    font: normal normal 16px "微软雅黑";
+}
+
+.row .inputBox {
+    width: 200px;
+    margin-top: 20px;
+    border: 2px solid white;
+    line-height: 18px;
+}
+
+.inputBox:focus {
+    border: 2px solid #1E9FFF;
+}
+
+#userName {
+    width: 184px;
+}
+
+/*验证码输入框*/
+#checkCode {
+    width: 134px;
+    line-height: 18px;
+    border: 2px solid white;
+}
+
+/*验证码框 悬停*/
+#checkCode:focus{
+    border: 2px solid #1E9FFF;
+    border-right: none;
+}
+
+#checkCode:focus + #makeCkCode {
+    border: 2px solid #1E9FFF;
+    border-left: none;
+}
+
+/*验证码*/
+#makeCkCode {
+    width: 50px;
+    line-height: 18px;
+    border: 2px solid white;
+    outline: none;
+}
+
+/*提交按钮*/
+#register {
+    position: relative;
+    width: 250px;
+    height: 40px;
+    color: white;
+    border: none;
+    background-color: dodgerblue;
+    border-radius: 9px;
+    box-shadow: rgb(0,0,0,0.2);
+}
+
+.go {
+    margin-left: 50px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+}

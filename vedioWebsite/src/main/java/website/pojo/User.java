@@ -1,5 +1,6 @@
 package website.pojo;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -34,4 +35,17 @@ public class User extends BaseEntity {
 
     private Integer isAdmin;
     //管理员要管理视频
+    private Integer isTemp;
+
+    @TableField(exist = false)
+    private String role;
+
+    public String getRole() {
+        if(isAdmin == 1) {
+           role = "管理员";
+        }else {
+           role = "用户";
+        }
+        return role;
+    }
 }

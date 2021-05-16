@@ -1,12 +1,15 @@
 package website.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import website.common.entity.AjaxJson;
+import website.mapper.LoginMapper;
 import website.pojo.Subscription;
+import website.pojo.User;
 import website.service.SubscriptionService;
 import website.service.VideoService;
 import website.vo.VideoVo;
@@ -24,6 +27,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/campus")
 public class MainController {
+    @Autowired
+    LoginMapper loginMapper;
 
     @Autowired
     VideoService videoService;
@@ -69,6 +74,21 @@ public class MainController {
         List<VideoVo> videoListPro = videoService.transTime(videoList);
         result.setSuccess(true);
         result.setData(videoListPro);
+        return result;
+    }
+
+    @RequestMapping("/getCurrentUserInfo")
+    public AjaxJson getCurrentUserInfo(@Param("userCode")String userCode) {
+        AjaxJson result = new AjaxJson();
+        try {
+            QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+            queryWrapper.eq("USER_CODE",userCode);
+            User user = loginMapper.selectOne(queryWrapper);
+            result.setData(user);
+            result.setSuccess(true);
+        }catch(Exception e) {
+            result.setSuccess(false);
+        }
         return result;
     }
 }
